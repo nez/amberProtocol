@@ -70,7 +70,7 @@ passport.deserializeUser(function(id, done){
 var isAuthenticated = function(req, res, next){
     if (req.isAuthenticated())
         return next();
-    res.redirect('/login')
+    res.redirect('/');
 };
 
 // If user not authenticated
@@ -91,27 +91,28 @@ var createHash = function(password){
 *  #############################################################
 */
 
+// Login landing
+router.get('/', isNotAuthenticated, function(req, res, next){
+    res.render('login', {title: '', message: req.flash('message')});
+});
+
 // Handle login
-router.post('/', passport.authenticate('login',{
+router.post('/login', passport.authenticate('login',{
     sucessRedirect: '/principal',
     failureRedirect: '/',
     failureFlash: true
 }));
 
+router.get('/principal', isAuthenticated, function(req, res){
+    res.render('principal', {title: 'Amber', user: req.user, section: 'principal'});
+});
+
 // Handle logout
-router.get('/signout', function(req, res){
+/*router.get('/signout', function(req, res){
   req.logout();
   res.redirect('/');
 })
-
-// Get login
-router.get('/', isNotAuthenticated, function(req, res, next){
-  res.render('login', {title: '', message: req.flash('message')});
-});
-
-router.get('/principal', isAuthenticated, function(req, res){
-  res.render('principal', {title: 'Amber', user: req.user, section: 'principal'});
-});
+*/
 
 
 module.exports = router;
