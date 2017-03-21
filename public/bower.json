@@ -1,0 +1,17 @@
+{
+  "name": "Amber",
+  "homepage": "https://github.com/mxabierto/amberProtocol",
+  "authors": [
+    "Mario Torres <mario291187@gmail.com>"
+  ],
+  "description": "Amber protocol",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
