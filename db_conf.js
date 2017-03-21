@@ -12,7 +12,7 @@ if (typeof process.env.DB != "undefined"){
     " defaulting to -> postgres://auser:test@localhost/amber");
     db = pgp({
         host: 'localhost',
-        port: '3000',
+        //port: '3000',
         database: 'amber',
         user: 'auser',
         password: 'test'
