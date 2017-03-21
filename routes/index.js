@@ -1,12 +1,12 @@
-var express  = require('express');
-var router   = express.Router();
-var path     = require('path');
-var db_conf  = require('../db_conf');
-var flash    = require('connect-flash');
-var passport = require('passport');
-var expressSession = require('express-sesion');
+var express        = require('express');
+var router         = express.Router();
+var path           = require('path');
+var db_conf        = require('../db_conf');
+var flash          = require('connect-flash');
+var passport       = require('passport');
+var expressSession = require('express-session');
 var LocalStrategy  = require('passport-local').Strategy;
-var bCrypt   = require('bcrypt-nodejs');
+var bCrypt         = require('bcrypt-nodejs');
 
 // Configure
 router.use(flash());
@@ -70,7 +70,7 @@ passport.deserializeUser(function(id, done){
 var isAuthenticated = function(req, res, next){
     if (req.isAuthenticated())
         return next();
-    res.redirect('/')
+    res.redirect('/login')
 };
 
 // If user not authenticated
@@ -92,7 +92,7 @@ var createHash = function(password){
 */
 
 // Handle login
-router.post('/login', passport.authenticate('login',{
+router.post('/', passport.authenticate('login',{
     sucessRedirect: '/principal',
     failureRedirect: '/',
     failureFlash: true
@@ -104,9 +104,14 @@ router.get('/signout', function(req, res){
   res.redirect('/');
 })
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+// Get login
+router.get('/', isNotAuthenticated, function(req, res, next){
+  res.render('login', {title: '', message: req.flash('message')});
 });
+
+router.get('/principal', isAuthenticated, function(req, res){
+  res.render('principal', {title: 'Amber', user: req.user, section: 'principal'});
+});
+
 
 module.exports = router;
