@@ -129,7 +129,7 @@ router.get('/alerta', isAuthenticated, function(req, res){
 });
 
 /* Admin */
-router.get('/administrador', isAuthenticated, function(req, res){
+router.get('/admin', isAuthenticated, function(req, res){
    res.render('administrador', {title: 'Amber', user: req.user, section: 'administrador'})
 });
 
