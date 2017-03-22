@@ -1,0 +1,44 @@
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/principal"><i class="fa fa-home"></i></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <% if ( user.permiso_tablero ) {%>
+                <li class="<%= section=='tablero'?'active':'' %>"><a href="/tablero">Tablero</a></li>
+                <%}
+                if (user.permiso_administrador){%>
+                <li class="<%= section=='admin'?'active':'' %>"><a href="/admin">Administrador</a></li>
+                <%}
+                if (user.permiso_alerta){%>
+                <li class="<%= section=='alerta'?'active':'' %>"><a href="/inventario">Alerta</a></li>
+                <%}%>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <% if (user.permiso_alerta){%>
+                <li class="<%= section=='xmlAlerta'?'active':'' %>"><a href="/xmlAlerta"><i class="fa fa-code"></i></a></li>
+                <li class="<%= section=='pdfAlerta'?'active':'' %>"><a href="/pdfAlerta"><i class="fa fa-print"></i></a></li>
+                <%}%>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user.nombres %> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-action="user_profile" data-user_id="<%= user.id %>" data-toggle="modal" data-target="#genericModal"><i class="fa fa-user"></i> Actualizar información </a></li>
+                        <li><a href="#" data-action="change_password" data-user_id="<%= user.id %>" data-toggle="modal" data-target="#genericModal"><i class="fa fa-key"></i> Cambiar contraseña </a></li>
+                        <li role="separator" class="divider"></li>
+                        <!--<li class="dropdown-header">Nav header</li>-->
+                        <li><a href="/signout"><i class="fa fa-sign-out"></i> Salir </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
