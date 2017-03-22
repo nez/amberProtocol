@@ -118,4 +118,19 @@ router.get('/principal', isAuthenticated, function (req, res) {
     res.render('principal', { title: 'Amber', user: req.user, section: 'principal'});
 });
 
+/* Tablero */
+router.get('/tablero', isAuthenticated, function(req, res){
+    res.render('tablero', {title: 'Amber', user: req.user, section: 'tablero'});
+});
+
+/* Admin */
+router.get('/alerta', isAuthenticated, function(req, res){
+    res.render('alerta', {title: 'Amber', user: req.user, section: 'alerta'});
+});
+
+/* Admin */
+router.get('/administrador', isAuthenticated, function(req, res){
+   res.render('administrador', {title: 'Amber', user: req.user, section: 'administrador'})
+});
+
 module.exports = router;
