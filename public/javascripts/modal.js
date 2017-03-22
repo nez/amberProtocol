@@ -22,3 +22,14 @@ function modalEvents(button, modal, page ) {
             break;
     }
 }
+
+
+
+$('#genericModal').on('show.bs.modal', function (event) {
+    alert('shhhdown!');
+    var button = $(event.relatedTarget);
+    var modal = $(this);
+
+    var page = 0;
+    modalEvents(button, modal, page);
+});
