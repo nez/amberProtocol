@@ -1,3 +1,5 @@
+@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -5,4 +7,35 @@ body {
 
 a {
   color: #00B7FF;
+}
+
+html, body, .container-table {
+  height: 100%;
+}
+.container-table {
+  display: table;
+}
+.vertical-center-row {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+.btn-primary {
+  background: none;
+  border: 2px solid #a6192e;
+  color: #a6192e;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+  background: #a6192e;
+  color: white;
+  border: 2px solid #a6192e;
+}
+
+.btn-primary:active, btn-primary.active{
+  border-color: #9e9e9e !important;
+  background: #9e9e9e !important;
+  color: white;
+  box-shadow: none;
 }
