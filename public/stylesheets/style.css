@@ -39,3 +39,48 @@ html, body, .container-table {
   color: white;
   box-shadow: none;
 }
+
+
+.nav-pills> li > a  {
+  color: white;
+  background: #a6192e;
+  border: 2px solid #a6192e;
+}
+
+.nav-pills> li > a:hover  {
+  color: white;
+  background: #ad1457;
+  border: 2px solid #ad1457;
+}
+
+.nav-pills> li > a:active, .nav-pills> li > a.active, .nav-pills> li > a:focus, .nav-pills> li > a.focus, .nav-pills > li.active > a:focus, .nav-pills > li.active > a{
+  background: white !important;
+  border: 2px solid #a6192e;
+  border-color: #a6192e !important;
+  color: #a6192e !important;
+  box-shadow: none;
+}
+
+
+.fa-chevron-circle-up:hover, .fa-chevron-circle-down:hover, .fa-times-circle-o:hover{
+  color: #616161 !important;
+  box-shadow: none;
+}
+
+.fa-chevron-circle-up:active, .fa-chevron-circle-down:active, .fa-times-circle-o:active{
+  color: #a6192e !important;
+  box-shadow: none;
+}
+
+.panel-heading {
+  background: #a6192e !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.selectpicker {
+  border-color: #9E9E9E !important;
+  background-color: white !important;
+  color: #9E9E9E  !important;
+  font-weight: bold;
+}
