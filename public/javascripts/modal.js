@@ -35,6 +35,20 @@ function modalEvents(button, modal, page ) {
                 });
             });
             break;
+        case "new_alert":
+            modal.find('.modal-title').text('Registrar alerta');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/alert/new', {}, function(){
+                modal.find('form').submit(function(e){
+                    $.post('/alert/register', $(this).serializeArray()).done(function(data){
+                        alert(data.message);
+                        if(data.status == 'Ok'){
+                            modal.modal('hide');
+                        }
+                    });
+                    e.preventDefault();
+                });
+            });
     }
 }
 

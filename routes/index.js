@@ -148,7 +148,13 @@ router.get('/alerta', isAuthenticated, function(req, res){
 
 /* Admin */
 router.get('/admin', isAuthenticated, function(req, res){
-   res.render('administrador', {title: 'Amber', user: req.user, section: 'administrador'})
+    res.render('administrador', {title: 'Amber', user: req.user, section: 'administrador'})
+});
+
+
+/* New alert */
+router.post('/alert/new', isAuthenticated, function(req, res){
+    res.render('partials/new-alert', {title: 'Amber', user: req.user})
 });
 
 /* New dep */
@@ -159,32 +165,32 @@ router.post('/dep/new', isAuthenticated, function(req, res){
 /* Register dep */
 router.post('/dep/register', isAuthenticated, function(req, res){
     console.log(req.body);
-   db_conf.db.one('insert into dependencias (nombre, direccion_calle, direccion_numero_int, direccion_numero_ext, ' +
-       'direccion_colonia, direccion_localidad, direccion_municipio, direccion_ciudad, direccion_estado, direccion_pais, slug) ' +
-       'values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning id, nombre', [
-       req.body.dependencia,
-       req.body.direccion_calle,
-       req.body.direccion_numero_int,
-       req.body.direccion_numero_ext,
-       req.body.direccion_colonia,
-       req.body.direccion_localidad,
-       req.body.direccion_municipio,
-       req.body.direccion_ciudad,
-       req.body.direccion_estado,
-       req.body.direccion_pais,
-       req.body.slug
-   ]).then(function(data){
+    db_conf.db.one('insert into dependencias (nombre, direccion_calle, direccion_numero_int, direccion_numero_ext, ' +
+        'direccion_colonia, direccion_localidad, direccion_municipio, direccion_ciudad, direccion_estado, direccion_pais, slug) ' +
+        'values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning id, nombre', [
+        req.body.dependencia,
+        req.body.direccion_calle,
+        req.body.direccion_numero_int,
+        req.body.direccion_numero_ext,
+        req.body.direccion_colonia,
+        req.body.direccion_localidad,
+        req.body.direccion_municipio,
+        req.body.direccion_ciudad,
+        req.body.direccion_estado,
+        req.body.direccion_pais,
+        req.body.slug
+    ]).then(function(data){
         res.json({
             status:'Ok',
             message: 'Se ha registrado la dependencia: ' + data.nombre
         })
-   }).catch(function(error){
+    }).catch(function(error){
         console.log(error);
         res.json({
             status: 'Error',
             message: 'Ocurrió un error al registrar la dependencia'
         })
-   })
+    })
 });
 
 /* New User */

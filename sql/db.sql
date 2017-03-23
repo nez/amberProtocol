@@ -59,6 +59,7 @@ insert into usuarios ("usuario","contrasena","nombres","apellido_paterno","apell
 drop table if exists alertas cascade;
 create table alertas(
     id serial primary key,
+    title text,
     id_usuario integer references usuarios(id),
     sent date,
     status text,
