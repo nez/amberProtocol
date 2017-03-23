@@ -14,6 +14,7 @@ drop table if exists dependencias cascade;
 create table dependencias (
     id serial primary key,
     nombre text,
+    slug   text,
     direccion_calle text,
     direccion_numero_int text,
     direccion_numero_ext text,
