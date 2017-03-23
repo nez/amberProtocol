@@ -26,7 +26,6 @@ function modalEvents(button, modal, page ) {
 
 
 $('#genericModal').on('show.bs.modal', function (event) {
-    alert('shhhdown!');
     var button = $(event.relatedTarget);
     var modal = $(this);
 
