@@ -49,6 +49,20 @@ function modalEvents(button, modal, page ) {
                     e.preventDefault();
                 });
             });
+            break;
+        case "new_info":
+            modal.find('.modal-title').text('Registrar información');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/info/new', {}, function(){
+                $.post('/info/register', $(this).serializeArray()).done(function(data){
+                    alert(data.message);
+                    if(data.status == 'Ok'){
+                        modal.modal('hide');
+                    }
+                });
+                e.preventDefault();
+            });
+            break;
     }
 }
 

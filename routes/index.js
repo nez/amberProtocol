@@ -152,6 +152,20 @@ router.get('/admin', isAuthenticated, function(req, res){
 });
 
 
+/* New Info */
+router.post('/info/new', isAuthenticated, function(req, res){
+    db_conf.db.manyOrNone('select * from alertas').then(function(data){
+        res.render('partials/new-info', {title:'Amber', user: req.user, alertas: data})
+    }).catch(function (error){
+        console.log(error);
+        res.json({
+            status: 'error',
+            message: 'Ocurrió un error a la hora de registrar la alerta'
+        })
+    });
+});
+
+
 /* New alert */
 router.post('/alert/new', isAuthenticated, function(req, res){
     res.render('partials/new-alert', {title: 'Amber', user: req.user})
