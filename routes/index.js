@@ -268,6 +268,24 @@ router.post('/user/new', isAuthenticated, function (req, res) {
     });
 });
 
+/* Look up dep view */
+router.post('/dep/find-deps-view', isAuthenticated, function(req, res){
+    res.render('partials/find-deps-view', {title: 'Amber', user: req.user})
+});
+
+/* Look up results */
+router.post('/dep/results', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.manyOrNone("select * from dependencias where nombre ilike '%$1%' or slug %like '%$2%' ").then(function(data){
+        res.render('partials/deps-results-view', deps);
+    }).catch(function(error){
+        res.json({
+            status: 'error',
+            message: 'Ocurrió un error en la búsqueda'
+        })
+    })
+})
+
 /* New User register */
 router.post('/user/signup', isAuthenticated, function(req, res){
     db_conf.db.one('select count(*) as count from usuarios where usuario =$1',[ req.body.usuario ]).then(function (data) {

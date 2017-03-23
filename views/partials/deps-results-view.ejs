@@ -1,0 +1,16 @@
+<%
+if (deps.length > 0){%>
+<label>Resultados</label>
+<div class="list-group">
+    <% for ( var i =0; i < deps.length ; i++ ){ %>
+    <a href="#" class="list-group-item"  data-deps_id="<%= deps[i].id %>">
+        <h4 class="list-group-item-heading"><strong>ID: <span style="color:#a6192e"><%=deps[i].id%></span></strong></h4>
+        <h4> <%= deps[i].nombre %> </h4>
+        <p class="list-group-item-text"> <strong>Slug:</strong> <%= deps[i].slug %></p>
+    </a>
+    <%}%>
+</div>
+
+<%}else {%>
+<div class="alert alert-info" role="alert">No hay dependencias registradas</div>
+<%}%>
