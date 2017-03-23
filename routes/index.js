@@ -95,6 +95,24 @@ var createHash = function(password){
  * ############################################
  */
 
+// ----------------------------------------------------
+// Useful functions
+function numericCol ( x ){
+    return ( x == '' || isNaN(x))?null:x;
+}
+
+function stob( str) {
+    return (str == 'true')
+}
+
+/* uploads */
+var multer = require ('multer');
+
+var upload = multer({
+    dest: path.join(__dirname, '..', 'uploads')
+});
+// ----------------------------------------------------
+
 /* Handle Login POST */
 router.post('/login', passport.authenticate('login', {
     successRedirect: '/principal',
@@ -133,9 +151,43 @@ router.get('/admin', isAuthenticated, function(req, res){
    res.render('administrador', {title: 'Amber', user: req.user, section: 'administrador'})
 });
 
+/* New dep */
+router.post('/dep/new', isAuthenticated, function(req, res){
+    res.render('partials/new-dependency', {title: 'Amber', user: req.user})
+});
+
+/* Register dep */
+router.post('/dep/register', isAuthenticated, function(req, res){
+    console.log(req.body);
+   db_conf.db.one('insert into dependencias (nombre, direccion_calle, direccion_numero_int, direccion_numero_ext, ' +
+       'direccion_colonia, direccion_localidad, direccion_municipio, direccion_ciudad, direccion_estado, direccion_pais) ' +
+       'values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning id, nombre', [
+       req.body.dependencia,
+       req.body.direccion_calle,
+       req.body.direccion_numero_int,
+       req.body.direccion_numero_ext,
+       req.body.direccion_colonia,
+       req.body.direccion_localidad,
+       req.body.direccion_municipio,
+       req.body.direccion_ciudad,
+       req.body.direccion_estado,
+       req.body.direccion_pais
+   ]).then(function(data){
+        res.json({
+            status:'Ok',
+            message: 'Se ha registrado la dependencia: ' + data.nombre
+        })
+   }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al registrar la dependencia'
+        })
+   })
+});
+
 /* New User */
-router.post('/user/new',isAuthenticated,function (req, res) {
-    console.log("INSIDE");
+router.post('/user/new', isAuthenticated, function (req, res) {
     db_conf.db.manyOrNone('select * from dependencias').then(function(data){
         res.render('partials/new-user', {dependencias: data});
     }).catch(function (error) {
@@ -145,10 +197,6 @@ router.post('/user/new',isAuthenticated,function (req, res) {
 });
 
 /* New User register */
-/*
- * Nuevos usuarios
- */
-
 router.post('/user/signup', isAuthenticated, function(req, res){
     db_conf.db.one('select count(*) as count from usuarios where usuario =$1',[ req.body.usuario ]).then(function (data) {
 
@@ -165,7 +213,7 @@ router.post('/user/signup', isAuthenticated, function(req, res){
 
         return db_conf.db.one('insert into usuarios ( usuario, contrasena, email, nombres, apellido_paterno, apellido_materno, rfc, direccion_calle, direccion_numero_int, ' +
             'direccion_numero_ext, direccion_colonia, direccion_localidad, direccion_municipio, direccion_ciudad, direccion_estado, direccion_pais,' +
-            ' permiso_tablero, permiso_administrador, permiso_alertas, id_dependencia) values' +
+            ' permiso_tablero, permiso_administrador, permiso_alerta, id_dependencia) values' +
             '($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20) returning id, usuario ', [
             req.body.usuario.trim(),
             bCrypt.hashSync( req.body.contrasena, bCrypt.genSaltSync(10), null),

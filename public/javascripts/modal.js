@@ -20,6 +20,21 @@ function modalEvents(button, modal, page ) {
                 });
             });
             break;
+        case "new_dep":
+            modal.find('.modal-title').text('Registrar dependencia');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/dep/new', {}, function(){
+                modal.find('form').submit(function(e){
+                    $.post('/dep/register', $(this).serializeArray()).done(function(data){
+                        alert(data.message);
+                        if(data.status == 'Ok'){
+                            modal.modal('hide');
+                        }
+                    });
+                    e.preventDefault();
+                });
+            });
+            break;
     }
 }
 
