@@ -276,9 +276,13 @@ router.post('/dep/find-deps-view', isAuthenticated, function(req, res){
 /* Look up results */
 router.post('/dep/results', isAuthenticated, function(req, res){
     console.log(req.body);
-    db_conf.db.manyOrNone("select * from dependencias where nombre ilike '%$1%' or slug %like '%$2%' ").then(function(data){
-        res.render('partials/deps-results-view', deps);
+    db_conf.db.manyOrNone("select * from dependencias where nombre ilike '%$1#%' or slug ilike '%$2#%' ", [
+        req.body.nombre,
+        req.body.siglas
+    ]).then(function(data){
+        res.render('partials/deps-results-view', {deps: data});
     }).catch(function(error){
+        console.log(error);
         res.json({
             status: 'error',
             message: 'Ocurrió un error en la búsqueda'
