@@ -152,7 +152,7 @@ router.get('/admin', isAuthenticated, function(req, res){
 });
 
 
-/* New Info */
+/* New info */
 router.post('/info/new', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from alertas').then(function(data){
         res.render('partials/new-info', {title:'Amber', user: req.user, alertas: data})
@@ -165,6 +165,40 @@ router.post('/info/new', isAuthenticated, function(req, res){
     });
 });
 
+/* Register info */
+router.post('/info/register', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.one('insert into infos (id_alert, event, responsetype, urgency, severity, certainty, headline, description) ' +
+        ' values($1, $2, $3, $4, $5, $6, $7, $8) returning id, id_alert', [
+        req.body.id_alerta,
+        req.body.event,
+        req.body.responsetype,
+        req.body.urgency,
+        req.body.severidad,
+        req.body.certeza,
+        //req.body.optradio,
+        req.body.headline,
+        req.body.desc
+    ]).then(function(data){
+        db_conf.db.task(function(t){
+            return t.batch([
+                data,
+                t.oneOrNone('select * from alertas where id = $1', data.id_alert)
+            ])
+        })
+    }).then(function(data){
+        res.json({
+            status: 'Ok',
+            message: 'Se registro con exito la información de la alerta:  ' + data[0].title
+        })
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'error',
+            message: 'Ocurrió un error al registrar la información de la alerta'
+        })
+    });
+})
 
 /* New alert */
 router.post('/alert/new', isAuthenticated, function(req, res){
@@ -175,14 +209,13 @@ router.post('/alert/new', isAuthenticated, function(req, res){
 router.post('/alert/register', isAuthenticated, function(req, res){
     console.log(req.body);
     console.log(req.user.id);
-    db_conf.db.one('insert into alertas (title, id_usuario, status, msgtype, source, description) ' +
-        ' values($1, $2, $3, $4, $5, $6) returning id, title', [
+    db_conf.db.one('insert into alertas (title, id_usuario, status, msgtype, source) ' +
+        ' values($1, $2, $3, $4, $5) returning id, title', [
         req.body.title,
         req.user.id,
         req.body.status,
         req.body.msgtype,
-        req.body.source,
-        req.body.desc
+        req.body.source
     ]).then(function(data){
         res.json({
             status: 'Ok',

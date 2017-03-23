@@ -54,13 +54,15 @@ function modalEvents(button, modal, page ) {
             modal.find('.modal-title').text('Registrar información');
             modal.find('#modal_content').html("");
             modal.find('#modal_content').load('/info/new', {}, function(){
-                $.post('/info/register', $(this).serializeArray()).done(function(data){
-                    alert(data.message);
-                    if(data.status == 'Ok'){
-                        modal.modal('hide');
-                    }
+                modal.find('form').submit(function(e){
+                    $.post('/info/register', $(this).serializeArray()).done(function(data){
+                        alert(data.message);
+                        if(data.status == 'Ok'){
+                            modal.modal('hide');
+                        }
+                    });
+                    e.preventDefault();
                 });
-                e.preventDefault();
             });
             break;
     }
