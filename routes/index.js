@@ -170,26 +170,19 @@ router.post('/info/register', isAuthenticated, function(req, res){
     console.log(req.body);
     db_conf.db.one('insert into infos (id_alert, event, responsetype, urgency, severity, certainty, headline, description) ' +
         ' values($1, $2, $3, $4, $5, $6, $7, $8) returning id, id_alert', [
-        req.body.id_alerta,
-        req.body.event,
-        req.body.responsetype,
-        req.body.urgency,
-        req.body.severidad,
-        req.body.certeza,
-        //req.body.optradio,
-        req.body.headline,
-        req.body.desc
+            req.body.id_alerta,
+            req.body.event,
+            req.body.responsetype,
+            req.body.urgency,
+            req.body.severidad,
+            req.body.certeza,
+            //req.body.optradio,
+            req.body.headline,
+            req.body.desc
     ]).then(function(data){
-        db_conf.db.task(function(t){
-            return t.batch([
-                data,
-                t.oneOrNone('select * from alertas where id = $1', data.id_alert)
-            ])
-        })
-    }).then(function(data){
         res.json({
             status: 'Ok',
-            message: 'Se registro con exito la información de la alerta:  ' + data[0].title
+            message: 'Se registro con exito la información de la alerta:  '
         })
     }).catch(function(error){
         console.log(error);
