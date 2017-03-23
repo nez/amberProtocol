@@ -157,6 +157,31 @@ router.post('/alert/new', isAuthenticated, function(req, res){
     res.render('partials/new-alert', {title: 'Amber', user: req.user})
 });
 
+/* Register alert */
+router.post('/alert/register', isAuthenticated, function(req, res){
+    console.log(req.body);
+    console.log(req.user.id);
+    db_conf.db.one('insert into alertas (title, id_usuario, status, msgtype, source, description) ' +
+        ' values($1, $2, $3, $4, $5, $6) returning title', [
+        req.body.title,
+        req.user.id,
+        req.body.status,
+        req.body.msgtype,
+        req.body.source,
+        req.boddy.desc
+    ]).then(function(data){
+        res.json({
+            status: 'Ok',
+            message: 'Se ha dado generado la alerta: ' + data.title
+        });
+    }).catch(function(error){
+        res.json({
+            status: 'error',
+            message: 'Ocurrió un error al generar la alerta.'
+        });
+    });
+});
+
 /* New dep */
 router.post('/dep/new', isAuthenticated, function(req, res){
     res.render('partials/new-dependency', {title: 'Amber', user: req.user})

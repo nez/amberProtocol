@@ -64,7 +64,8 @@ create table alertas(
     sent date,
     status text,
     msgType text,
-    source text
+    source text,
+    description text
 );
 
 /* Alert Info */
