@@ -162,13 +162,13 @@ router.post('/alert/register', isAuthenticated, function(req, res){
     console.log(req.body);
     console.log(req.user.id);
     db_conf.db.one('insert into alertas (title, id_usuario, status, msgtype, source, description) ' +
-        ' values($1, $2, $3, $4, $5, $6) returning title', [
+        ' values($1, $2, $3, $4, $5, $6) returning id, title', [
         req.body.title,
         req.user.id,
         req.body.status,
         req.body.msgtype,
         req.body.source,
-        req.boddy.desc
+        req.body.desc
     ]).then(function(data){
         res.json({
             status: 'Ok',
