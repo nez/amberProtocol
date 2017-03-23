@@ -93,8 +93,10 @@ function modalEvents(button, modal, page ) {
             modal.find('#modal_content').load('/dep/find-deps-view', {}, function(){
                 modal.find('#find').submit(function(e){
                     modal.find('#search_results').load('/dep/results', $(this).serializeArray(), function(){
-                        $('#search_results').find('.list-group-item').click(function(e){
+                        $('#search_results').find('.list-group-item').click(function(){
+                            modal.find('#modal_content').load('/dep/edit', {id: $(this).data('deps_id')}, function(){
 
+                            })
                             e.preventDefault();
                         })
                     })

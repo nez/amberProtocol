@@ -258,16 +258,6 @@ router.post('/dep/register', isAuthenticated, function(req, res){
     })
 });
 
-/* New User */
-router.post('/user/new', isAuthenticated, function (req, res) {
-    db_conf.db.manyOrNone('select * from dependencias').then(function(data){
-        res.render('partials/new-user', {dependencias: data});
-    }).catch(function (error) {
-        console.log(error);
-        res.send('<b>Error</b>');
-    });
-});
-
 /* Look up dep view */
 router.post('/dep/find-deps-view', isAuthenticated, function(req, res){
     res.render('partials/find-deps-view', {title: 'Amber', user: req.user})
@@ -288,7 +278,22 @@ router.post('/dep/results', isAuthenticated, function(req, res){
             message: 'Ocurrió un error en la búsqueda'
         })
     })
-})
+});
+
+/* Edit dep */
+router.post('/dep/edit', isAuthenticated, function(req, res){
+    res.render('partials/new-dependency', {title: 'Amber', user: req.user})
+});
+
+/* New User */
+router.post('/user/new', isAuthenticated, function (req, res) {
+    db_conf.db.manyOrNone('select * from dependencias').then(function(data){
+        res.render('partials/new-user', {dependencias: data});
+    }).catch(function (error) {
+        console.log(error);
+        res.send('<b>Error</b>');
+    });
+});
 
 /* New User register */
 router.post('/user/signup', isAuthenticated, function(req, res){
