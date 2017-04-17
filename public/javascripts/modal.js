@@ -94,7 +94,17 @@ function modalEvents(button, modal, page ) {
                 modal.find('#find').submit(function(e){
                     modal.find('#search_results').load('/dep/results', $(this).serializeArray(), function(){
                         $('#search_results').find('.list-group-item').click(function(){
-                            modal.find('#modal_content').load('/dep/edit', {id: $(this).data('deps_id')});
+                            modal.find('#modal_content').load('/dep/edit', {id: $(this).data('deps_id')}, function(){
+                                modal.find('form').submit(function(e){
+                                    $.post('/dep/update', $(this).serializeArray()).done(function(data){
+                                        alert(data.message);
+                                        if(data.status == 'Ok'){
+                                            modal.modal('hide');
+                                        }
+                                    });
+                                    e.preventDefault();
+                                })
+                            });
                         });
                     });
                     e.preventDefault();

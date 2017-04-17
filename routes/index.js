@@ -170,15 +170,15 @@ router.post('/info/register', isAuthenticated, function(req, res){
     console.log(req.body);
     db_conf.db.one('insert into infos (id_alert, event, responsetype, urgency, severity, certainty, headline, description) ' +
         ' values($1, $2, $3, $4, $5, $6, $7, $8) returning id, id_alert', [
-            req.body.id_alerta,
-            req.body.event,
-            req.body.responsetype,
-            req.body.urgency,
-            req.body.severidad,
-            req.body.certeza,
-            //req.body.optradio,
-            req.body.headline,
-            req.body.desc
+        req.body.id_alerta,
+        req.body.event,
+        req.body.responsetype,
+        req.body.urgency,
+        req.body.severidad,
+        req.body.certeza,
+        //req.body.optradio,
+        req.body.headline,
+        req.body.desc
     ]).then(function(data){
         res.json({
             status: 'Ok',
@@ -221,6 +221,12 @@ router.post('/alert/register', isAuthenticated, function(req, res){
         });
     });
 });
+
+/*
+ * ---------------------------------
+ *  Deps
+ * ---------------------------------
+ */
 
 /* New dep */
 router.post('/dep/new', isAuthenticated, function(req, res){
@@ -294,6 +300,45 @@ router.post('/dep/edit', isAuthenticated, function(req, res){
         })
     })
 });
+
+/* Update dep */
+router.post('/dep/update', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.oneOrNone('update dependencias set nombre = $1, direccion_calle = $2, direccion_numero_int = $3, direccion_numero_ext = $4, ' +
+        'direccion_colonia = $5, direccion_localidad = $6, direccion_municipio = $7, direccion_ciudad = $8, direccion_estado = $9, direccion_pais = $10, ' +
+        'slug = $11 where id = $12 returning id, nombre ', [
+        req.body.dependencia,
+        req.body.direccion_calle,
+        req.body.direccion_numero_int,
+        req.body.direccion_numero_ext,
+        req.body.direccion_colonia,
+        req.body.direccion_localidad,
+        req.body.direccion_municipio,
+        req.body.direccion_ciudad,
+        req.body.direccion_estado,
+        req.body.direccion_pais,
+        req.body.slug,
+        req.body.id
+    ]).then(function (data) {
+        res.json({
+            status: 'Ok',
+            message: 'Dependencia actualizada exitosamente'
+        })
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al actualizar la dependencia'
+        })
+    })
+})
+
+
+/*
+ * ---------------------------------
+ *  Users
+ * ---------------------------------
+ */
 
 /* New User */
 router.post('/user/new', isAuthenticated, function (req, res) {
