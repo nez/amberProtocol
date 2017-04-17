@@ -229,7 +229,9 @@ router.post('/alert/register', isAuthenticated, function(req, res){
 
 /* Look up alert view */
 router.post('/alert/find-alerts-view', isAuthenticated, function(req, res){
-    res.render('partials/find-alerts-view', {title: 'Amber', user: req.user})
+    db_conf.db.manyOrNone('select * from dependencias').then(function(data){
+        res.render('partials/find-alerts-view', {title: 'Amber', user: req.user, deps: data})
+    })
 });
 
 /*

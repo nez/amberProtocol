@@ -117,7 +117,20 @@ function modalEvents(button, modal, page ) {
             modal.find('.modal-title').text('Buscar alerta');
             modal.find('#modal_content').html("");
             modal.find('#modal_content').load('/alert/find-alerts-view', {}, function(){
+                $('#alerts_datepicker1').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    defaultDate: new Date().setDate(new Date().getDate() - 1)
+                });
+                $('#alerts_datepicker2').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    defaultDate: new Date().setDate(new Date().getDate())
+                });
+                modal.find('#find').submit(function(e){
+                    modal.find('#search_results').load('/search/alerts/results', $(this).serializeArray(), function(){
 
+                    })
+                    e.preventDefault();
+                })
             })
     }
 }
