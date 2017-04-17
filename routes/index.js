@@ -234,6 +234,26 @@ router.post('/alert/find-alerts-view', isAuthenticated, function(req, res){
     })
 });
 
+/* Look up results */
+router.post('/alerts/results', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.manyOrNone("select * from alertas where status = 'activa' and (title ilike '%$1#%' or (sent <= $2 and sent >= $3) or source = $4) ", [
+        req.body.title,
+        req.body.fecha_final,
+        req.body.fecha_inicial,
+        req.body.id_source
+    ]).then(function(data){
+        console.log(data.length);
+        res.render('partials/alerts-results-view', {title: 'Amber', user: req.user, alerts: data})
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al buscar la alerta'
+        })
+    })
+})
+
 /*
  * ---------------------------------
  *  Deps

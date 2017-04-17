@@ -126,7 +126,7 @@ function modalEvents(button, modal, page ) {
                     defaultDate: new Date().setDate(new Date().getDate())
                 });
                 modal.find('#find').submit(function(e){
-                    modal.find('#search_results').load('/search/alerts/results', $(this).serializeArray(), function(){
+                    modal.find('#search_results').load('/alerts/results', $(this).serializeArray(), function(){
 
                     })
                     e.preventDefault();
