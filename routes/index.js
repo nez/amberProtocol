@@ -254,6 +254,22 @@ router.post('/alerts/results', isAuthenticated, function(req, res){
     })
 })
 
+/* Edit alert */
+router.post('/alert/edit', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.task(function(t){
+        return this.batch([
+            this.oneOrNone('select * from alertas where id = $1', [
+                req.body.id
+            ]),
+            this.manyOrNone('select * from dependencias')
+        ])
+    }).then(function(data){
+        res.render('partials/edit-alert', {title: 'Amber', user: req.user, deps: data[1], alert: data[0]});
+    })
+});
+
+
 /*
  * ---------------------------------
  *  Deps

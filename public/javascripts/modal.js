@@ -127,7 +127,11 @@ function modalEvents(button, modal, page ) {
                 });
                 modal.find('#find').submit(function(e){
                     modal.find('#search_results').load('/alerts/results', $(this).serializeArray(), function(){
+                        $('#search_results').find('.list-group-item').click(function(){
+                            modal.find('#modal_content').load('/alert/edit', {id: $(this).data('alerts_id')}, function(){
 
+                            })
+                        })
                     })
                     e.preventDefault();
                 })

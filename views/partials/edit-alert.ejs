@@ -1,0 +1,37 @@
+<form>
+    <p>
+        <label>Titulo</label>
+        <input type="text" class="form-control" name="title" required value="<%=alert.title%>">
+    </p>
+    <p>
+        <label>Estatus</label>
+        <input type="text" class="form-control" name="status" required value="<%=alert.status%>">
+    </p>
+
+    <p>
+        <label>Fuente</label>
+        <select name = "source" class="form-control" required>
+            <%
+            if (deps.length > 0 ){
+            for (var i =0; i < deps.length; i++){
+            %>
+            <option value="<%= deps[i].id %>" <%= alert.source == deps[i].id?'selected' : null %> > <%= deps[i].nombre %> </option>
+            <%
+            }
+            }else {
+            %>
+            <option value="">Ninguna</option>
+            <% }%>
+        </select>
+    </p>
+
+    <p>
+        <label>Tipo de alerta</label>
+        <input type="text" class="form-control" name="msgtype" value="<%=alert.msgtype%>">
+    </p>
+
+    <p>
+        <button class="btn btn-primary" type="submit">Registrar cambios</button>
+    </p>
+
+</form>
