@@ -282,7 +282,17 @@ router.post('/dep/results', isAuthenticated, function(req, res){
 
 /* Edit dep */
 router.post('/dep/edit', isAuthenticated, function(req, res){
-    res.render('partials/new-dependency', {title: 'Amber', user: req.user})
+    console.log(req.body);
+    db_conf.db.oneOrNone('select * from dependencias where id = $1', [
+        req.body.id
+    ]).then(function(data){
+        res.render('partials/edit-dependency', {title: 'Amber', user: req.user, dep:data})
+    }).catch(function(error){
+        res.json({
+            status: 'error',
+            message: 'Ocurrió un error al encontrar la dependencia'
+        })
+    })
 });
 
 /* New User */
