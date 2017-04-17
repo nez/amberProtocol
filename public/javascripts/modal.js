@@ -111,6 +111,14 @@ function modalEvents(button, modal, page ) {
                 })
             });
             break;
+
+        // Alerts
+        case "edit_alert":
+            modal.find('.modal-title').text('Buscar alerta');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/alert/find-alerts-view', {}, function(){
+
+            })
     }
 }
 
