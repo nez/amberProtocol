@@ -81,10 +81,10 @@ function modalEvents(button, modal, page ) {
             break;
 
         /*
-        * -----------------------------------------------
-        *  Edit Registers
-        * -----------------------------------------------
-        */
+         * -----------------------------------------------
+         *  Edit Registers
+         * -----------------------------------------------
+         */
 
         // Deps
         case "edit_dep":
@@ -94,14 +94,13 @@ function modalEvents(button, modal, page ) {
                 modal.find('#find').submit(function(e){
                     modal.find('#search_results').load('/dep/results', $(this).serializeArray(), function(){
                         $('#search_results').find('.list-group-item').click(function(){
-                            modal.find('#modal_content').load('/dep/edit', {id: $(this).data('deps_id')}, function(){
-
-                            })
-                            e.preventDefault();
-                        })
-                    })
+                            modal.find('#modal_content').load('/dep/edit', {id: $(this).data('deps_id')});
+                        });
+                    });
+                    e.preventDefault();
                 })
-            })
+            });
+            break;
     }
 }
 
