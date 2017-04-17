@@ -269,6 +269,29 @@ router.post('/alert/edit', isAuthenticated, function(req, res){
     })
 });
 
+/* Alert update */
+router.post('/alert/update', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.oneOrNone('update alertas set title = $1, status = $2, source = $3, msgtype = $4, sent = now(), id_usuario = $5 ' +
+        'where id = $6 returning id, title', [
+        req.body.title,
+        req.body.status,
+        req.body.source,
+        req.body.msgtype,
+        req.user.id,
+        req.body.id
+    ]).then(function(data){
+        res.json({
+            status: 'Ok',
+            message: 'La alerta fue actualizada exitosamente'
+        })
+    }).catch(function(error){
+        res.json({
+            status: 'Error',
+            message: 'Hubo un error al registrar los cambios'
+        })
+    })
+})
 
 /*
  * ---------------------------------

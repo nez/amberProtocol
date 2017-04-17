@@ -103,12 +103,12 @@ function modalEvents(button, modal, page ) {
                                         }
                                     });
                                     e.preventDefault();
-                                })
+                                });
                             });
                         });
                     });
                     e.preventDefault();
-                })
+                });
             });
             break;
 
@@ -129,13 +129,22 @@ function modalEvents(button, modal, page ) {
                     modal.find('#search_results').load('/alerts/results', $(this).serializeArray(), function(){
                         $('#search_results').find('.list-group-item').click(function(){
                             modal.find('#modal_content').load('/alert/edit', {id: $(this).data('alerts_id')}, function(){
-
-                            })
-                        })
-                    })
+                                modal.find('form').submit(function(e){
+                                    $.post('/alert/update', $(this).serializeArray()).done(function(data){
+                                        alert(data.message);
+                                        if(data.status == 'Ok'){
+                                            modal.modal('hide');
+                                        }
+                                    });
+                                    e.preventDefault();
+                                });
+                            });
+                        });
+                    });
                     e.preventDefault();
-                })
-            })
+                });
+            });
+            break;
     }
 }
 
