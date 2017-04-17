@@ -9,13 +9,25 @@
     </p>
 
     <p>
-        <label>Tipo de alerta</label>
-        <input type="text" class="form-control" name="msgtype">
+        <label>Fuente</label>
+        <select name = "source" class="form-control" required>
+            <%
+            if (deps.length > 0 ){
+            for (var i =0; i < deps.length; i++){
+            %>
+            <option value="<%= deps[i].id %>"> <%= deps[i].nombre %> </option>
+            <%
+            }
+            }else {
+            %>
+            <option value="">Ninguna</option>
+            <% }%>
+        </select>
     </p>
 
     <p>
-        <label>Fuente</label>
-        <input type="text" class="form-control" name="source">
+        <label>Tipo de alerta</label>
+        <input type="text" class="form-control" name="msgtype">
     </p>
 
     <p>

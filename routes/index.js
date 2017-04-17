@@ -195,15 +195,19 @@ router.post('/info/register', isAuthenticated, function(req, res){
 
 /* New alert */
 router.post('/alert/new', isAuthenticated, function(req, res){
-    res.render('partials/new-alert', {title: 'Amber', user: req.user})
+    db_conf.db.manyOrNone(
+        'select * from dependencias'
+    ).then(function(data){
+        res.render('partials/new-alert', {title: 'Amber', user: req.user, deps: data});
+    })
 });
 
 /* Register alert */
 router.post('/alert/register', isAuthenticated, function(req, res){
     console.log(req.body);
     console.log(req.user.id);
-    db_conf.db.one('insert into alertas (title, id_usuario, status, msgtype, source) ' +
-        ' values($1, $2, $3, $4, $5) returning id, title', [
+    db_conf.db.one('insert into alertas (title, id_usuario, status, msgtype, source, sent) ' +
+        ' values($1, $2, $3, $4, $5, now()) returning id, title', [
         req.body.title,
         req.user.id,
         req.body.status,

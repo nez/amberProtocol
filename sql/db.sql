@@ -61,7 +61,7 @@ create table alertas(
     id serial primary key,
     title text,
     id_usuario integer references usuarios(id),
-    sent date,
+    sent timestamp,
     status text,
     msgType text,
     source text,
