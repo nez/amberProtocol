@@ -18,11 +18,10 @@ a {
   color: #00B7FF;
 }
 
-html, body, .container-table {
-  height: 100%;
-}
 .container-table {
   display: table;
+  margin-top: 120px;
+  margin-bottom: 20px;
 }
 .vertical-center-row {
   display: table-cell;
