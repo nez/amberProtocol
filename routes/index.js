@@ -168,17 +168,17 @@ router.post('/info/new', isAuthenticated, function(req, res){
 /* Register info */
 router.post('/info/register', isAuthenticated, function(req, res){
     console.log(req.body);
-    db_conf.db.one('insert into infos (id_alert, event, responsetype, urgency, severity, certainty, headline, description) ' +
-        ' values($1, $2, $3, $4, $5, $6, $7, $8) returning id, id_alert', [
+    db_conf.db.one('insert into infos (id_alert, event, responsetype, urgency, severity, certainty, headline, description, effective) ' +
+        ' values($1, $2, $3, $4, $5, $6, $7, $8, $9) returning id, id_alert', [
         req.body.id_alerta,
         req.body.event,
         req.body.responsetype,
         req.body.urgency,
         req.body.severidad,
         req.body.certeza,
-        //req.body.optradio,
         req.body.headline,
-        req.body.desc
+        req.body.desc,
+        req.body.effective
     ]).then(function(data){
         res.json({
             status: 'Ok',

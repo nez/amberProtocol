@@ -68,6 +68,10 @@ function modalEvents(button, modal, page ) {
             modal.find('.modal-title').text('Registrar información');
             modal.find('#modal_content').html("");
             modal.find('#modal_content').load('/info/new', {}, function(){
+                $('#info_datepicker').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    defaultDate: new Date().setDate(new Date().getDate() - 1)
+                });
                 modal.find('form').submit(function(e){
                     $.post('/info/register', $(this).serializeArray()).done(function(data){
                         alert(data.message);
