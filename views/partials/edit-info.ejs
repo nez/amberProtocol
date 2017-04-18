@@ -10,7 +10,7 @@
             if (alertas.length > 0 ){
             for (var i =0; i < alertas.length; i++){
             %>
-            <option value="<%= alertas[i].id %>"> <%= alertas[i].title %> </option>
+            <option value="<%= alertas[i].id %>" <%= info.alert_id == alertas[i].id?'selected' : null %> > <%= alertas[i].title %> </option>
             <%
             }
             }else {
@@ -22,32 +22,32 @@
 
     <p>
         <label>Nombre evento</label>
-        <input type="text" class="form-control" name="event" required>
+        <input type="text" class="form-control" name="event" required value="<%=info.event%>">
     </p>
     <p>
         <label>Tipo de respuesta</label>
-        <input type="text" class="form-control" name="responsetype" required>
+        <input type="text" class="form-control" name="responsetype" required value="<%=info.respnsetype%>">
     </p>
 
     <p>
         <label>Urgencia</label>
-        <input type="text" class="form-control" name="urgency">
+        <input type="text" class="form-control" name="urgency" value="<%=info.urgency%>">
     </p>
 
     <p>
         <label>Severidad</label>
-        <input type="text" class="form-control" name="severidad">
+        <input type="text" class="form-control" name="severidad" value="<%=info.severity%>">
     </p>
     <p>
         <label>Certeza</label>
-        <input type="text" class="form-control" name="certeza">
+        <input type="text" class="form-control" name="certeza" value="<%=info.certainty%>">
     </p>
 
     <p>
         <label>Activa</label>
     <div class="form-group">
         <div class='input-group'>
-            <input type="text" name="effective" id="info_datepicker" class="form-control" required>
+            <input type="text" name="effective" id="info_datepicker" class="form-control" required value="<%=info.effective%>">
             <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -56,7 +56,7 @@
     </p>
     <p>
         <label>Descripcion</label>
-        <textarea rows="5" name="desc" class = "form-control"></textarea>
+        <textarea rows="5" name="desc" class = "form-control" value="<%=info.description%>" placeholder="<%=info.description%>"><%=info.description%></textarea>
     </p>
 
     <p>
