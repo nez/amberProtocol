@@ -149,6 +149,45 @@ function modalEvents(button, modal, page ) {
                 });
             });
             break;
+
+        // Infos
+        case "edit_info":
+            modal.find('.modal-title').text('Buscar alerta');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/alert/find-alerts-view', {}, function(){
+                $('#alerts_datepicker1').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    defaultDate: new Date().setDate(new Date().getDate() - 1)
+                });
+                $('#alerts_datepicker2').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    defaultDate: new Date().setDate(new Date().getDate())
+                });
+                modal.find('#find').submit(function(e){
+                    modal.find('#search_results').load('/alerts/results', $(this).serializeArray(), function(){
+                        $('#search_results').find('.list-group-item').click(function(){
+                            // Infos
+                          $('#search_results').load('/info/results', {id: $(this).data('alerts_id')}, function(){
+                              $('#search_results').find('.list-group-item').click(function(){
+                                   modal.find('#modal_content').load('/info/edit', {id: $(this).data('infos_id')}, function(){
+                                   modal.find('form').submit(function(e){
+                                   $.post('/alert/update', $(this).serializeArray()).done(function(data){
+                                   alert(data.message);
+                                   if(data.status == 'Ok'){
+                                   modal.modal('hide');
+                                   }
+                                   });
+                                   e.preventDefault();
+                                   });
+                                   });
+                              })
+                          })
+                        });
+                    });
+                    e.preventDefault();
+                });
+            });
+            break;
     }
 }
 

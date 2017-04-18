@@ -187,10 +187,47 @@ router.post('/info/register', isAuthenticated, function(req, res){
     }).catch(function(error){
         console.log(error);
         res.json({
-            status: 'error',
+            status: 'Error',
             message: 'Ocurrió un error al registrar la información de la alerta'
         })
     });
+})
+
+// Infos results
+router.post('/info/results', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.manyOrNone('select * from infos where id_alert = $1', [
+        req.body.id
+    ]).then(function(data){
+        res.render('partials/infos-results-view', {title: 'Amber', user: req.user, infos: data})
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al buscar la información'
+        })
+    })
+})
+
+// Info edit
+router.post('/info/edit', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.task(function(t){
+        return this.batch([
+            this.oneOrNone('select * from infos where id = $1', [
+                req.body.id
+            ]),
+            this.manyOrNone('select * from alertas')
+        ])
+    }).then(function(data){
+        res.render('partials/edit-info', {title: 'Amber', user: req.user, alertas: data[1], info: data[0]})
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al buscar la informacón'
+        })
+    })
 })
 
 /* New alert */
@@ -199,6 +236,12 @@ router.post('/alert/new', isAuthenticated, function(req, res){
         'select * from dependencias'
     ).then(function(data){
         res.render('partials/new-alert', {title: 'Amber', user: req.user, deps: data});
+    }).catch(function(error){
+        console.log(errro);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error'
+        })
     })
 });
 

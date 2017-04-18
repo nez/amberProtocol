@@ -1,0 +1,16 @@
+<%
+if (infos.length > 0){%>
+<label>Resultados</label>
+<div class="list-group">
+    <% for ( var i =0; i < infos.length ; i++ ){ %>
+    <a href="#" class="list-group-item"  data-infos_id="<%= infos[i].id %>">
+        <h4 class="list-group-item-heading"><strong>ID: <span style="color:#a6192e"><%=infos[i].id%></span></strong></h4>
+        <h4> <%= infos[i].headline %> </h4>
+        <p class="list-group-item-text"> <strong>Effectiva:</strong> <%= infos[i].effective %></p>
+    </a>
+    <%}%>
+</div>
+
+<%}else {%>
+<div class="alert alert-info" role="alert">No hay información registrada</div>
+<%}%>

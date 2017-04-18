@@ -1,0 +1,66 @@
+<form>
+    <p>
+        <label>Encabezado</label>
+        <input type="text" class="form-control" name="headline" required value="<%=info.headline%>">
+    </p>
+    <p>
+        <label>Alerta a la que pertenece la información</label>
+        <select name = "id_alerta" class="form-control" required>
+            <%
+            if (alertas.length > 0 ){
+            for (var i =0; i < alertas.length; i++){
+            %>
+            <option value="<%= alertas[i].id %>"> <%= alertas[i].title %> </option>
+            <%
+            }
+            }else {
+            %>
+            <option value="">Ninguna</option>
+            <% }%>
+        </select>
+    </p>
+
+    <p>
+        <label>Nombre evento</label>
+        <input type="text" class="form-control" name="event" required>
+    </p>
+    <p>
+        <label>Tipo de respuesta</label>
+        <input type="text" class="form-control" name="responsetype" required>
+    </p>
+
+    <p>
+        <label>Urgencia</label>
+        <input type="text" class="form-control" name="urgency">
+    </p>
+
+    <p>
+        <label>Severidad</label>
+        <input type="text" class="form-control" name="severidad">
+    </p>
+    <p>
+        <label>Certeza</label>
+        <input type="text" class="form-control" name="certeza">
+    </p>
+
+    <p>
+        <label>Activa</label>
+    <div class="form-group">
+        <div class='input-group'>
+            <input type="text" name="effective" id="info_datepicker" class="form-control" required>
+            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+        </div>
+    </div>
+    </p>
+    <p>
+        <label>Descripcion</label>
+        <textarea rows="5" name="desc" class = "form-control"></textarea>
+    </p>
+
+    <p>
+        <button class="btn btn-primary" type="submit">Registrar</button>
+    </p>
+
+</form>
