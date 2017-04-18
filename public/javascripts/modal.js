@@ -167,21 +167,21 @@ function modalEvents(button, modal, page ) {
                     modal.find('#search_results').load('/alerts/results', $(this).serializeArray(), function(){
                         $('#search_results').find('.list-group-item').click(function(){
                             // Infos
-                          $('#search_results').load('/info/results', {id: $(this).data('alerts_id')}, function(){
-                              $('#search_results').find('.list-group-item').click(function(){
-                                   modal.find('#modal_content').load('/info/edit', {id: $(this).data('infos_id')}, function(){
-                                   modal.find('form').submit(function(e){
-                                   $.post('/alert/update', $(this).serializeArray()).done(function(data){
-                                   alert(data.message);
-                                   if(data.status == 'Ok'){
-                                   modal.modal('hide');
-                                   }
-                                   });
-                                   e.preventDefault();
-                                   });
-                                   });
-                              })
-                          })
+                            $('#search_results').load('/info/results', {id: $(this).data('alerts_id')}, function(){
+                                $('#search_results').find('.list-group-item').click(function(){
+                                    modal.find('#modal_content').load('/info/edit', {id: $(this).data('infos_id')}, function(){
+                                        modal.find('form').submit(function(e){
+                                            $.post('/info/update', $(this).serializeArray()).done(function(data){
+                                                alert(data.message);
+                                                if(data.status == 'Ok'){
+                                                    modal.modal('hide');
+                                                }
+                                            });
+                                            e.preventDefault();
+                                        });
+                                    });
+                                })
+                            })
                         });
                     });
                     e.preventDefault();

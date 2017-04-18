@@ -230,6 +230,37 @@ router.post('/info/edit', isAuthenticated, function(req, res){
     })
 })
 
+/* Info update */
+router.post('/info/update', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.oneOrNone(
+        'update infos set id_alert = $1, event = $2, responsetype = $3, urgency = $4, severity = $5, certainty = $6, ' +
+        ' effective = $7, headline = $8, description = $9 where id = $10 returning id, event',[
+            req.body.id_alerta,
+            req.body.event,
+            req.body.responsetype,
+            req.body.urgency,
+            req.body.severidad,
+            req.body.certeza,
+            new Date(req.body.effective),
+            req.body.headline,
+            req.body.desc,
+            req.body.id
+        ]
+    ).then(function(data){
+        res.json({
+            status: 'Ok',
+            message: 'Se ha actualizado exitosamente la información'
+        })
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al actualizar la información'
+        })
+    })
+})
+
 /* New alert */
 router.post('/alert/new', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone(
