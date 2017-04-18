@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title><%= title%></title>
+    <!-- Polymer -->
+    <script type="text/javascript" src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="/bower_components/dgm-navbar/dgm-navbar.html">
+    <link rel="import" href="/bower_components/dgm-footer/dgm-footer.html">
     <!-- Bootstrap -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/stylesheets/style.css" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <!-- font awesome -->
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
@@ -27,6 +30,7 @@
 
 <% include partials/modal.ejs %>
 
+<dgm-footer></dgm-footer>
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src='/bower_components/moment/min/moment.min.js'></script>
 <script src='/bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
@@ -34,8 +38,9 @@
 
 <script src='/bower_components/react/react.min.js'></script>
 <script src='/bower_components/react/react-dom.min.js'></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 </body>
+
+
 </html>

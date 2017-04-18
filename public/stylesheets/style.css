@@ -1,8 +1,17 @@
 @import url('http://getbootstrap.com/dist/css/bootstrap.css');
-
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
+html {
+  font-family: "Open Sans";
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin-top: 80px;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8em;
+  color: #6f6f6f;
 }
 
 a {
@@ -19,7 +28,6 @@ html, body, .container-table {
   display: table-cell;
   vertical-align: middle;
 }
-
 
 .btn-primary {
   background: none;
