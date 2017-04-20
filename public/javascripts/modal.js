@@ -227,7 +227,7 @@ function modalEvents(button, modal, page ) {
                                 $('#search_results').find('.list-group-item').click(function(){
                                     modal.find('#modal_content').load('/resource/edit', {id: $(this).data('resources_id')}, function(){
                                         modal.find('form').submit(function(e){
-                                            $.post('/info/update', $(this).serializeArray()).done(function(data){
+                                            $.post('/resource/update', $(this).serializeArray()).done(function(data){
                                                 alert(data.message);
                                                 if(data.status == 'Ok'){
                                                     modal.modal('hide');

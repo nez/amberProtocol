@@ -224,6 +224,30 @@ router.post('/resource/edit', isAuthenticated, function(req, res){
     })
 })
 
+/* Resource update */
+router.post('/resource/update', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.oneOrNone('update resources set id_alert = $1, description = $2, mimetype = $3, ' +
+        'rec_size = $4, uri = $5 where id = $6 returning id', [
+            req.body.id_alerta,
+        req.body.description,
+        req.body.mimeType,
+        req.body.size,
+        req.body.uri,
+        req.body.id
+    ]).then(function(data){
+        res.json({
+            status: 'Ok',
+            message: 'Se han actualizado los datos del recurso exitosamente'
+        });
+    }).catch(function(error){
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al actualizar los datos del recurso'
+        })
+    })
+})
+
 /* New info */
 router.post('/info/new', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from alertas').then(function(data){
