@@ -1,0 +1,16 @@
+<%
+if (resources.length > 0){%>
+<label>Resultados</label>
+<div class="list-group">
+    <% for ( var i =0; i < resources.length ; i++ ){ %>
+    <a href="#" class="list-group-item"  data-resources_id="<%= resources[i].id %>">
+        <h4 class="list-group-item-heading"><strong>ID: <span style="color:#a6192e"><%=resources[i].id%></span></strong></h4>
+        <h4> <%= resources[i].mimetype %> </h4>
+        <p class="list-group-item-text"> <strong>Tamaño:</strong> <%= resources[i].rec_size %></p>
+    </a>
+    <%}%>
+</div>
+
+<%}else {%>
+<div class="alert alert-info" role="alert">No hay recursos registrados</div>
+<%}%>

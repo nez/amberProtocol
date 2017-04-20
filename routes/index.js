@@ -165,6 +165,7 @@ router.post('/resource/new', isAuthenticated, function(req, res){
     });
 });
 
+/* Register resource */
 router.post('/resource/register', isAuthenticated, function(req, res){
     console.log(req.body),
         db_conf.db.one('insert into resources (id_alert, description, mimetype, rec_size, uri) ' +
@@ -178,15 +179,50 @@ router.post('/resource/register', isAuthenticated, function(req, res){
             res.json({
                 status: 'Ok',
                 message: 'El recurso se ha registrado con éxito'
-            })
+            });
         }).catch(function(error){
             console.log(error);
             res.json({
                 status: 'Error',
                 message: 'Ocurrió un error al registrar el recurso'
-            })
+            });
         });
 });
+
+/* Resource results */
+router.post('/resource/results', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.manyOrNone('select * from resources where id = $1', [
+        req.body.id,
+    ]).then(function(data){
+        res.render('partials/resources-results-view', {title: 'Amber', user: req.user, resources: data});
+    }).catch(function(error){
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un erro al buscar el recurso'
+        })
+    })
+})
+
+/* Resource edit */
+router.post('/resource/edit', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.task(function(t){
+        return t.batch([
+            this.oneOrNone('select * from resources where id = $1', [
+                req.body.id
+            ]),
+            this.manyOrNone('select * from alertas')
+        ]).then(function(data){
+            res.render('partials/edit-resource', {title: 'Amber', user: req.user, resource: data[0], alertas: data[1]});
+        }).catch(function(error){
+            res.json({
+                status: 'Error',
+                message: 'Ocurrió un erro al buscar el recurso'
+            })
+        })
+    })
+})
 
 /* New info */
 router.post('/info/new', isAuthenticated, function(req, res){

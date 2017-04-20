@@ -1,7 +1,7 @@
 <form>
     <p>
         <label>Tipo de contenido</label>
-        <input type="text" class="form-control" name="mimeType" required placeholder="Tipo"> <!-- Option list -->
+        <input type="text" class="form-control" name="mimeType" required value="<%=resource.mimetype%>"> <!-- Option list -->
     </p>
     <p>
         <label>Alerta a la que pertenece el recurso</label>
@@ -10,7 +10,7 @@
             if (alertas.length > 0 ){
             for (var i =0; i < alertas.length; i++){
             %>
-            <option value="<%= alertas[i].id %>"> <%= alertas[i].title %> </option>
+            <option value="<%= alertas[i].id %>" <%= resource.alert_id == alertas[i].id?'selected' : null %> > <%= alertas[i].title %> </option>
             <%
             }
             }else {
@@ -22,15 +22,15 @@
 
     <p>
         <label>Descripcion</label>
-        <textarea rows="5" name="description" class = "form-control"></textarea>
+        <textarea rows="5" name="description" class = "form-control"><%=resource.description%></textarea>
     </p>
     <p>
         <label>Tamaño en bytes</label>
-        <input type="number" name="size" class = "form-control"></input>
+        <input type="number" name="size" class = "form-control" value="<%=resource.rec_size%>"></input>
     </p>
     <p>
         <label>URI</label>
-        <input type="text" name="uri" class = "form-control"></input>
+        <input type="text" name="uri" class = "form-control" value="<%=resource.uri%>"></input>
     </p>
 
 
