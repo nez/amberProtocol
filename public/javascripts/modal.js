@@ -89,7 +89,15 @@ function modalEvents(button, modal, page ) {
             modal.find('.modal-title').text('Registrar recurso');
             modal.find('#modal_content').html("");
             modal.find('#modal_content').load('/resource/new', {}, function(){
-                
+                modal.find('form').submit(function(e){
+                    $.post('/resource/register', $(this).serializeArray()).done(function(data){
+                        alert(data.message);
+                        if(data.status == 'Ok'){
+                            modal.modal('hide');
+                        }
+                    });
+                    e.preventDefault();
+                });
             });
             break;
 
