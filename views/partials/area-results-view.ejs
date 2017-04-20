@@ -1,0 +1,16 @@
+<%
+if (areas.length > 0){%>
+<label>Resultados</label>
+<div class="list-group">
+    <% for ( var i =0; i < areas.length ; i++ ){ %>
+    <a href="#" class="list-group-item"  data-areas_id="<%= areas[i].id %>">
+        <h4 class="list-group-item-heading"><strong>ID: <span style="color:#a6192e"><%=areas[i].id%></span></strong></h4>
+        <h4> <%= areas[i].area %> </h4>
+        <p class="list-group-item-text"> <strong>Código geográfico:</strong> <%= areas[i].geocode %></p>
+    </a>
+    <%}%>
+</div>
+
+<%}else {%>
+<div class="alert alert-info" role="alert">No hay alertas registradas</div>
+<%}%>

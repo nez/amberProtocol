@@ -187,6 +187,24 @@ router.post('/area/register', isAuthenticated, function(req, res){
     });
 });
 
+/* Area results */
+router.post('/area/results', isAuthenticated, function(req, res){
+    console.log("AREA")
+    console.log(req.body);
+    db_conf.db.manyOrNone('select * from area where id_alert = $1', [
+        req.body.id
+    ]).then(function(data){
+        console.log(data);
+        res.render('partials/area-results-view', {title: 'Amber', user: req.user, areas: data})
+    }).catch(function(data){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al buscar el área'
+        });
+    });
+});
+
 /* New Resource */
 router.post('/resource/new', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from alertas').then(function(data){
