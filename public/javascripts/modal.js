@@ -84,6 +84,15 @@ function modalEvents(button, modal, page ) {
             });
             break;
 
+        // Resources
+        case "new_resource":
+            modal.find('.modal-title').text('Registrar recurso');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/resource/new', {}, function(){
+                
+            });
+            break;
+
         /*
          * -----------------------------------------------
          *  Edit Registers

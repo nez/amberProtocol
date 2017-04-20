@@ -152,6 +152,19 @@ router.get('/admin', isAuthenticated, function(req, res){
 });
 
 
+/* New Resource */
+router.post('/resource/new', isAuthenticated, function(req, res){
+    db_conf.db.manyOrNone('select * from alertas').then(function(data){
+        res.render('partials/new-resource', {title: 'Amber', user: req.user, alertas: data})
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al dar de alta el recurso'
+        });
+    });
+});
+
 /* New info */
 router.post('/info/new', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from alertas').then(function(data){
