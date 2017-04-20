@@ -101,6 +101,22 @@ function modalEvents(button, modal, page ) {
             });
             break;
 
+        // Area
+        case "new_area":
+            modal.find('.modal-title').text('Registrar area');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/area/new', {}, function(){
+                modal.find('form').submit(function(e){
+                    $.post('/area/register', $(this).serializeArray()).done(function(data){
+                        alert(data.message);
+                        if(data.status == 'Ok'){
+                            modal.modal('hide');
+                        }
+                    });
+                    e.preventDefault();
+                });
+            });
+            break;
         /*
          * -----------------------------------------------
          *  Edit Registers
@@ -206,7 +222,7 @@ function modalEvents(button, modal, page ) {
             });
             break;
 
-            // Resource
+        // Resource
         case "edit_resource":
             modal.find('.modal-title').text('Buscar alerta');
             modal.find('#modal_content').html("");

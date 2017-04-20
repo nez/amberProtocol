@@ -151,6 +151,22 @@ router.get('/admin', isAuthenticated, function(req, res){
     res.render('administrador', {title: 'Amber', user: req.user, section: 'administrador'})
 });
 
+/* New area */
+router.post('/area/new', isAuthenticated, function(req, res){
+    db_conf.db.manyOrNone('select * from alertas').then(function(data){
+       res.render('partials/new-area', {title: 'Amber', user: req.user, alertas: data})
+    }).catch(function(error){
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error'
+        });
+    });
+});
+
+/* Area regiter */
+router.post('/area/register', isAuthenticated, function(req, res){
+    console.log(req.body);
+})
 
 /* New Resource */
 router.post('/resource/new', isAuthenticated, function(req, res){
@@ -219,10 +235,10 @@ router.post('/resource/edit', isAuthenticated, function(req, res){
             res.json({
                 status: 'Error',
                 message: 'Ocurrió un erro al buscar el recurso'
-            })
-        })
-    })
-})
+            });
+        });
+    });
+});
 
 /* Resource update */
 router.post('/resource/update', isAuthenticated, function(req, res){
