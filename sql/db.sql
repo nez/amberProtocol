@@ -95,6 +95,50 @@ create table resources(
  uri text
 );
 
+/* Area :: Boletin */
+drop table if exists area cascade;
+create table area(
+ id serial primary key,
+ id_alert integer references alertas(id),
+   area text,
+   areaDesc text,
+   polygon polygon,
+   geoCode integer
+);
+
+/* Event :: Alerta */
+drop table if exists event cascade;
+create table event(
+id serial primary key,
+ id_alert integer references alertas(id),
+ edate date,
+ victimNumber integer,
+ companionNumber integer,
+ suspectNumber integer,
+ eventDesc text,
+ expiration date,
+ latitude numeric,
+ longitude numeric,
+ w3w text,
+ roadType text,
+ roadName text,
+ highway text,
+ backroad text,
+ exteriorNumber integer,
+ interiorNumber integer,
+ settlementType text,
+ settlementName text,
+ postalCode integer,
+ localityName text,
+ localityCoe integer,
+ municipalityName text,
+ municipalityCode integer,
+ stateName text,
+ stateCode integer,
+ perpendiculars text,
+ parallel text,
+ landmarks text
+);
 
 /* Victimas :: Alerta */
 drop table if exists victims cascade;
