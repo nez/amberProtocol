@@ -55,7 +55,7 @@ create table usuarios(
 insert into usuarios ("usuario","contrasena","nombres","apellido_paterno","apellido_materno","permiso_alerta","permiso_administrador", "permiso_tablero") values
 ('admin','$2a$10$DmxbjTLBYDdcha8qlXpsaOyUqkJ0BAQ3Q4EIyMtr5HLXm6R0gSvbm','Administrador','','', true, true, true);
 
-/* Alertas */
+/* Alertas :: Boletin */
 drop table if exists alertas cascade;
 create table alertas(
     id serial primary key,
@@ -68,7 +68,7 @@ create table alertas(
     description text
 );
 
-/* Alert Info */
+/* Alert Info :: Boletin */
 drop table if exists infos cascade;
 create table infos(
     id serial primary key,
@@ -84,23 +84,89 @@ create table infos(
     /* Area geografical info */
 );
 
-/* Codes */
-drop table if exists codes;
-create table codes(
-    id serial primary key,
-    id_infos integer references infos(id),
-    code_key text,
-    code_val  text
-);
-
-/* Parameters */
-drop table if exists codes;
-create table codes(
-    id serial primary key,
-    id_infos integer references infos(id),
-    param_key text,
-    param_val  text
+/* Recursos :: Boletin */
+drop table if exists resources cascade;
+create table resources(
+ id serial primary key,
+ id_alert integer references alertas(id),
+ description text,
+ mimeType text,
+ rec_size integer,
+ uri text
 );
 
 
+/* Victimas :: Alerta */
+drop table if exists victims cascade;
+create table victims(
+    id serial primary key,
+    id_alert integer references alertas(id),
+    name     text,
+    surname1 text,
+    surname2 text,
+    pic      text, /* Fix */
+    birthDate date,
+    age       integer,
+    gender   text,
+    nationality text,
+    hairType text,
+    hairColor text,
+    eyeColor text,
+    height numeric,
+    weight numeric,
+    complex text,
+    wear    text,
+    peculiar text
+);
 
+/* Companion :: Alerta */
+drop table if exists companion cascade;
+create table companion(
+  id serial primary key,
+    id_alert integer references alertas(id),
+    alias    text,
+    name     text,
+    surname1 text,
+    surname2 text,
+    pic      text, /* Fix */
+    birthDate date,
+    age       integer,
+    gender   text,
+    kinship   text,
+    nationality text,
+    hairType text,
+    hairColor text,
+    eyeColor text,
+    height numeric,
+    weight numeric,
+    complex text,
+    wear    text,
+    vehicle text,
+    peculiar text
+);
+
+/* Suspect :: Alerta */
+drop table if exists companion cascade;
+create table companion(
+  id serial primary key,
+    id_alert integer references alertas(id),
+    alias    text,
+    name     text,
+    surname1 text,
+    surname2 text,
+    pic      text, /* Fix */
+    birthDate date,
+    age       integer,
+    gender   text,
+    kinship   text,
+    nationality text,
+    hairType text,
+    hairColor text,
+    eyeColor text,
+    height numeric,
+    weight numeric,
+    complex text,
+    wear    text,
+    vehicle text,
+    peculiar text
+);
