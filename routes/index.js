@@ -174,7 +174,18 @@ router.post('/resource/register', isAuthenticated, function(req, res){
             req.body.mimeType,
             req.body.size,
             req.body.uri
-        ]);
+        ]).then(function(data){
+            res.json({
+                status: 'Ok',
+                message: 'El recurso se ha registrado con éxito'
+            })
+        }).catch(function(error){
+            console.log(error);
+            res.json({
+                status: 'Error',
+                message: 'Ocurrió un error al registrar el recurso'
+            })
+        });
 });
 
 /* New info */
@@ -207,7 +218,7 @@ router.post('/info/register', isAuthenticated, function(req, res){
     ]).then(function(data){
         res.json({
             status: 'Ok',
-            message: 'Se registro con exito la información de la alerta:  '
+            message: 'Se registro con exito la información de la alerta'
         })
     }).catch(function(error){
         console.log(error);
