@@ -4,14 +4,28 @@ html {
   font-family: "Open Sans";
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  position: relative;
+  min-height: 100%;
 }
 body {
-  margin-top: 80px;
+
+  margin-bottom: 60px;
   font-family: "Open Sans";
   font-size: 14px;
   font-weight: 400;
   line-height: 1.8em;
   color: #6f6f6f;
+}
+
+body > .container{
+  padding-top: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 412px;
 }
 
 a {

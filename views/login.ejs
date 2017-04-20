@@ -16,15 +16,24 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <!-- font awesome -->
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <style type="text/css">
+      body{
+      background: url(../images/back.png);
+      	background-color: #444;
+          background: url(../images/pinlayer2.png),url(../images/pinlayer1.png),url(../images/back.png);
+      }
+    </style>
+
 </head>
 
 <body>
 <dgm-navbar></dgm-navbar>
 <div class="container container-table">
-    <div class="row vertical-center-row">
+    <div class="row vertical-center-row wrap">
         <div class="span12">
             <form class="form-horizontal"  method="POST" action='/login'>
-                <div class="text-center col-md-4 col-md-offset-4" style="border-style: solid; border-color:#E0E0E0; border-width: 5px; border-radius: 25px">
+                <div class="text-center col-md-4 col-md-offset-4" style="background-color: white; border-style: solid; border-color:#E0E0E0; border-width: 5px; border-radius: 25px">
                     <div class="col-md-12">
                         <img src="../images/amber.jpg" alt="amber" width="132" height="102" align="center">
                     </div>
@@ -56,8 +65,23 @@
         </div>
     </div>
 </div>
-<dgm-footer></dgm-footer>
+<dgm-footer class="footer"></dgm-footer>
 </body>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='../javascripts/TweenLite.min.js'></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+  $(document).mousemove(function(e){
+     TweenLite.to($('body'),
+        .5,
+        { css:
+            {
+                backgroundPosition: ""+ parseInt(event.pageX/8) + "px "+parseInt(event.pageY/'12')+"px, "+parseInt(event.pageX/'15')+"px "+parseInt(event.pageY/'15')+"px, "+parseInt(event.pageX/'30')+"px "+parseInt(event.pageY/'30')+"px"
+            }
+        });
+  });
+});	</script>
+
 </html>
