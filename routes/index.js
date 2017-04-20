@@ -166,7 +166,26 @@ router.post('/area/new', isAuthenticated, function(req, res){
 /* Area regiter */
 router.post('/area/register', isAuthenticated, function(req, res){
     console.log(req.body);
-})
+    db_conf.db.oneOrNone('insert into area (id_alert, area, areadesc, polygon, geocode) ' +
+        'values ($1, $2, $3, $4, $5) returning id',[
+            req.body.id_alerta,
+        req.body.area,
+        req.body.areadesc,
+        req.body.polygon,
+        req.body.geocode
+    ]).then(function(data){
+        res.json({
+            status: 'Ok',
+            message: 'El área se ha registrado con éxito'
+        });
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al registrar el área'
+        });
+    });
+});
 
 /* New Resource */
 router.post('/resource/new', isAuthenticated, function(req, res){
