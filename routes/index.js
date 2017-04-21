@@ -143,7 +143,7 @@ router.get('/tablero', isAuthenticated, function(req, res){
 
 /* Admin */
 router.get('/alerta', isAuthenticated, function(req, res){
-    res.render('alerta', {title: 'Amber', user: req.user, section: 'alerta'});
+    res.render('alertaBeta', {title: 'Amber', user: req.user, section: 'alerta'});
 });
 
 /* Admin */

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title><%= title%></title>
+    <!-- Polymer -->
+    <script type="text/javascript" src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="/bower_components/dgm-footer/dgm-footer.html">
+    <!-- Bootstrap -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+
+<% include partials/navbar.ejs%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <!--<div class="panel panel-default">
+                <div class="panel-heading">Alertas</div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <button type="button" data-action="new_alert" data-toggle="modal" data-target="#genericModal" class="list-group-item"><i class="fa fa-plus-square"></i> <strong>Generar alerta</strong></button>
+                        <button type="button" data-action="edit_alert" data-toggle="modal" data-target="#genericModal"  class="list-group-item"><i class="fa fa-edit"></i> <strong>Editar o eliminar alerta</strong></button>
+                    </div>
+                </div>
+            </div>-->
+            <div class="col-sm-6 col-sm-offset-2">
+                <h2><strong>Alertas</strong></h2>
+            </div>
+            <img src="../images/alert.png" style="width:254px;height:228px;">
+            <row class="col-sm-12">
+                <div class="col-sm-6">
+                    <h4 data-action="new_alert" data-toggle="modal" data-target="#genericModal">Registrar</h4>
+                </div>
+                <div class="col-sm-6">
+                    <h4 data-action="edit_alert" data-toggle="modal" data-target="#genericModal">Editar</h4>
+                </div>
+            </row>
+        </div>
+        <div class="col-sm-6">
+            <!--<div class="panel panel-default">
+                <div class="panel-heading">Información</div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <button type="button" data-action="new_info" data-toggle="modal" data-target="#genericModal" class="list-group-item"><i class="fa fa-plus-square"></i> <strong>Agregar información</strong></button>
+                        <button type="button" data-action="edit_info" data-toggle="modal" data-target="#genericModal"  class="list-group-item"><i class="fa fa-edit"></i> <strong>Editar o eliminar información</strong></button>
+                    </div>
+                </div>
+            </div>-->
+            <div class="col-sm-6 col-sm-offset-2">
+                <h2><strong>Información</strong></h2>
+            </div>
+            <img src="../images/info.png" style="width:228px;height:228px;">
+            <row class="col-sm-12">
+                <div class="col-sm-6">
+                    <h4 data-action="new_info" data-toggle="modal" data-target="#genericModal">Registrar</h4>
+                </div>
+                <div class="col-sm-6">
+                    <h4 data-action="edit_info" data-toggle="modal" data-target="#genericModal">Editar</h4>
+                </div>
+            </row>
+        </div>
+        <div class="col-sm-6">
+            <!--<div class="panel panel-default">
+                <div class="panel-heading">Recursos</div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <button type="button" data-action="new_resource" data-toggle="modal" data-target="#genericModal" class="list-group-item"><i class="fa fa-plus-square"></i> <strong>Agregar recursos</strong></button>
+                        <button type="button" data-action="edit_resource" data-toggle="modal" data-target="#genericModal"  class="list-group-item"><i class="fa fa-edit"></i> <strong>Editar o eliminar recursos</strong></button>
+                    </div>
+                </div>
+            </div>-->
+            <div class="col-sm-6 col-sm-offset-2">
+                <h2><strong>Recursos</strong></h2>
+            </div>
+            <img src="../images/resource.png" style="width:304px;height:228px;">
+            <row>
+                <div class="col-sm-6">
+                    <h4 data-action="new_resource" data-toggle="modal" data-target="#genericModal">Registrar</h4>
+                </div>
+                <div class="col-sm-6">
+                    <h4 data-action="edit_resource" data-toggle="modal" data-target="#genericModal">Editar</h4>
+                </div>
+            </row>
+        </div>
+        <div class="col-sm-6">
+            <!--<div class="panel panel-default">
+                <div class="panel-heading">Área</div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <button type="button" data-action="new_area" data-toggle="modal" data-target="#genericModal" class="list-group-item"><i class="fa fa-plus-square"></i> <strong>Agregar área</strong></button>
+                        <button type="button" data-action="edit_area" data-toggle="modal" data-target="#genericModal"  class="list-group-item"><i class="fa fa-edit"></i> <strong>Editar o eliminar área</strong></button>
+                    </div>
+                </div>
+            </div>-->
+            <div class="col-sm-6 col-sm-offset-2">
+                <h2><strong>Área</strong></h2>
+            </div>
+            <img src="../images/area.png" style="width:304px;height:228px;">
+            <row>
+                <div class="col-sm-6">
+                    <h4 data-action="new_area" data-toggle="modal" data-target="#genericModal">Registrar</h4>
+                </div>
+                <div class="col-sm-6">
+                    <h4 data-action="edit_area" data-toggle="modal" data-target="#genericModal">Editar</h4>
+                </div>
+            </row>
+        </div>
+    </div>
+</div>
+
+<% include partials/modal.ejs %>
+<dgm-footer></dgm-footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="/bower_components/jspdf/dist/jspdf.min.js"></script>
+
+<!-- datepicker -->
+<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/bower_components/timepicker/jquery.timepicker.min.js"></script>
+<script src="/javascripts/modal.js"></script>
+</body>
+</html>
