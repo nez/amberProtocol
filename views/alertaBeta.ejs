@@ -22,9 +22,9 @@
 
 <% include partials/navbar.ejs%>
 
-<div class="container">
+<div class="container" style=" padding-top:15%;">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-3" style="text-align: center">
             <!--<div class="panel panel-default">
                 <div class="panel-heading">Alertas</div>
                 <div class="panel-body">
@@ -34,11 +34,11 @@
                     </div>
                 </div>
             </div>-->
-            <div class="col-sm-6 col-sm-offset-2">
+            <div class="col-sm-12" style="text-align: center">
                 <h2><strong>Alertas</strong></h2>
             </div>
-            <img src="../images/alert.png" style="width:254px;height:228px;">
-            <row class="col-sm-12">
+            <img src="../images/alert.png" style="width:154px;height:128px;">
+            <row class="col-sm-12" style="text-align: center">
                 <div class="col-sm-6">
                     <h4 data-action="new_alert" data-toggle="modal" data-target="#genericModal">Registrar</h4>
                 </div>
@@ -47,7 +47,7 @@
                 </div>
             </row>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3" style="text-align: center">
             <!--<div class="panel panel-default">
                 <div class="panel-heading">Información</div>
                 <div class="panel-body">
@@ -57,11 +57,11 @@
                     </div>
                 </div>
             </div>-->
-            <div class="col-sm-6 col-sm-offset-2">
+            <div class="col-sm-12" style="text-align: center">
                 <h2><strong>Información</strong></h2>
             </div>
-            <img src="../images/info.png" style="width:228px;height:228px;">
-            <row class="col-sm-12">
+            <img src="../images/info.png" style="width:128px;height:128px;">
+            <row class="col-sm-12" style="text-align: center">
                 <div class="col-sm-6">
                     <h4 data-action="new_info" data-toggle="modal" data-target="#genericModal">Registrar</h4>
                 </div>
@@ -70,7 +70,7 @@
                 </div>
             </row>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3" style="text-align: center">
             <!--<div class="panel panel-default">
                 <div class="panel-heading">Recursos</div>
                 <div class="panel-body">
@@ -80,11 +80,11 @@
                     </div>
                 </div>
             </div>-->
-            <div class="col-sm-6 col-sm-offset-2">
+            <div class="col-sm-12">
                 <h2><strong>Recursos</strong></h2>
             </div>
-            <img src="../images/resource.png" style="width:304px;height:228px;">
-            <row>
+            <img src="../images/resource.png" style="width:154px;height:128px;">
+            <row class="col-sm-12" style="text-align: center">
                 <div class="col-sm-6">
                     <h4 data-action="new_resource" data-toggle="modal" data-target="#genericModal">Registrar</h4>
                 </div>
@@ -93,7 +93,7 @@
                 </div>
             </row>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3" style="text-align: center">
             <!--<div class="panel panel-default">
                 <div class="panel-heading">Área</div>
                 <div class="panel-body">
@@ -103,11 +103,11 @@
                     </div>
                 </div>
             </div>-->
-            <div class="col-sm-6 col-sm-offset-2">
+            <div class="col-sm-12">
                 <h2><strong>Área</strong></h2>
             </div>
-            <img src="../images/area.png" style="width:304px;height:228px;">
-            <row>
+            <img src="../images/area.png" style="width:154px;height:128px;">
+            <row class="col-sm-12" style="text-align: center">
                 <div class="col-sm-6">
                     <h4 data-action="new_area" data-toggle="modal" data-target="#genericModal">Registrar</h4>
                 </div>
@@ -120,7 +120,12 @@
 </div>
 
 <% include partials/modal.ejs %>
+<div style="position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 50px;">
 <dgm-footer></dgm-footer>
+</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

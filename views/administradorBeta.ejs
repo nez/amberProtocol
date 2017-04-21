@@ -21,9 +21,9 @@
 <body>
 <% include partials/navbar.ejs%>
 
-<div class="container">
+<div class="container" style=" padding-top:15%;">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="text-align: center">
             <!--<div class="panel panel-default">
                 <div class="panel-heading">Dependencias</div>
                 <div class="panel-body">
@@ -33,11 +33,11 @@
                     </div>
                 </div>
             </div>-->
-            <div class="col-sm-6 col-sm-offset-2">
+            <div class="col-sm-12" style="text-align: center">
                 <h2><strong>Dependencias</strong></h2>
             </div>
             <img src="../images/building.png" style="width:304px;height:228px;">
-            <row>
+            <row style="text-align: center">
                 <div class="col-sm-6">
                     <h4 data-action="new_dep" data-toggle="modal" data-target="#genericModal">Registrar</h4>
                 </div>
@@ -46,7 +46,7 @@
                 </div>
             </row>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="text-align: center">
             <!--<div class="panel panel-default">
                 <div class="panel-heading">Administrar  usuarios</div>
                 <div class="panel-body">
@@ -56,11 +56,11 @@
                     </div>
                 </div>
             </div>-->
-            <div class="col-sm-6 col-sm-offset-2">
+            <div class="col-sm-12" style="text-align: center">
                 <h2><strong>Usuarios</strong></h2>
             </div>
             <img src="../images/user.png" style="width:224px;height:228px;">
-            <row>
+            <row style="text-align: center">
                 <div class="col-sm-6">
                     <h4 data-toggle="modal" data-target="#genericModal" data-action="new_user">Registrar</h4>
                 </div>
@@ -69,7 +69,7 @@
                 </div>
             </row>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="text-align: center">
             <!--<div class="panel panel-default">
                 <div class="panel-heading">Reportes</div>
                 <div class="panel-body">
@@ -78,11 +78,11 @@
                     </div>
                 </div>
             </div>-->
-            <div class="col-sm-6 col-sm-offset-2">
+            <div class="col-sm-12" style="text-align: center">
                 <h2><strong>Reportes</strong></h2>
             </div>
             <img src="../images/report.png" style="width:224px;height:228px;">
-            <row>
+            <row style="text-align: center">
                 <div class="col-sm-6 col-sm-offset-2">
                     <h4 data-toggle="modal" data-target="#genericModal" data-action="reports">Imprimir</h4>
                 </div>
@@ -92,7 +92,12 @@
 </div>
 
 <% include partials/modal.ejs %>
+<div style="position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 50px;">
 <dgm-footer></dgm-footer>
+</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

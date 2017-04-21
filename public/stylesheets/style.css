@@ -8,7 +8,6 @@ html {
   min-height: 100%;
 }
 body {
-
   margin-bottom: 60px;
   font-family: "Open Sans";
   font-size: 14px;
@@ -18,7 +17,7 @@ body {
 }
 
 body > .container{
-  padding-top: 60px;
+  padding-top:60px;
 }
 .footer {
   position: absolute;
@@ -114,3 +113,4 @@ h4:hover{
   color: #a6192e;
   font-weight: bold;
 }
+
