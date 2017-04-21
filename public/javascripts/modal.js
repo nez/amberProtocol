@@ -126,7 +126,10 @@ function modalEvents(button, modal, page ) {
                 modal.find('form').submit(function(e){
                     var ind_type = $('input[name=optradio]:checked').val();
                     modal.find('form').load('/ind/select-form', {ind_type: ind_type}, function(data){
-
+                        $('#ind_datepicker').datetimepicker({
+                            format: 'YYYY-MM-DD',
+                            defaultDate: new Date().setDate(new Date().getDate() - 1)
+                        });
                     });
                     e.preventDefault();
                 });
