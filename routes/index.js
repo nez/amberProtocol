@@ -220,10 +220,35 @@ router.post('/area/edit', isAuthenticated, function(req, res){
             res.json({
                 status: 'Error',
                 message: 'Ocurrió un error al buscar el área'
-            })
-        })
-    })
-})
+            });
+        });
+    });
+});
+
+/* Area update */
+router.post('/area/update', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.oneOrNone('update area set id_alert = $1, area = $2, areadesc = $3, polygon = $4, geocode = $5 where id = $6', [
+        req.body.id_alerta,
+        req.body.area,
+        req.body.areadesc,
+        req.body.polygon,
+        req.body.geocode,
+        req.body.id
+    ]).then(function(data){
+        res.json({
+            status: 'Ok',
+            message: 'Se actualizó el área exitosamente'
+        });
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al actualizar el área'
+        });
+    });
+});
+
 
 /* New Resource */
 router.post('/resource/new', isAuthenticated, function(req, res){

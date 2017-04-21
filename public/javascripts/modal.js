@@ -281,16 +281,22 @@ function modalEvents(button, modal, page ) {
                                 $('#search_results').find('.list-group-item').click(function(){
                                     modal.find('#modal_content').load('/area/edit', {id: $(this).data('areas_id')}, function(){
                                         modal.find('form').submit(function(e){
-                                            
-                                        })
-                                    })
-                                })
-                            })
-                        })
-                    })
+                                            $.post('/area/update', $(this).serializeArray()).done(function(data){
+                                                alert(data.message);
+                                                if(data.status == 'Ok'){
+                                                    modal.modal('hide');
+                                                }
+                                            });
+                                            e.preventDefault();
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
                     e.preventDefault();
-                })
-            })
+                });
+            });
     }
 }
 
