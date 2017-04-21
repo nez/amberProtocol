@@ -148,7 +148,7 @@ router.get('/alerta', isAuthenticated, function(req, res){
 
 /* Admin */
 router.get('/admin', isAuthenticated, function(req, res){
-    res.render('administrador', {title: 'Amber', user: req.user, section: 'administrador'})
+    res.render('administradorBeta', {title: 'Amber', user: req.user, section: 'administrador'})
 });
 
 /* New area */
