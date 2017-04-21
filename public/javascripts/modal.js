@@ -125,10 +125,11 @@ function modalEvents(button, modal, page ) {
             modal.find('#modal_content').load('/ind/options', {}, function(){
                 modal.find('form').submit(function(e){
                     var ind_type = $('input[name=optradio]:checked').val();
-                    $.post('/ind/select-form', {ind_type: ind_type}).done(function(data){
-                        
-                    })
-                })
+                    modal.find('form').load('/ind/select-form', {ind_type: ind_type}, function(data){
+
+                    });
+                    e.preventDefault();
+                });
             });
             break;
         /*

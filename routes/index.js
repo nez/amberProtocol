@@ -159,12 +159,27 @@ router.post('/ind/options', isAuthenticated, function(req, res){
 /* Ind select */
 router.post('/ind/select-form', isAuthenticated, function(req, res){
     console.log(req.body);
+    db_conf.db.task(function(t){
+        return this.batch([
+            req.body.ind_type,
+            this.manyOrNone('select * from alertas')
+        ])
+    }).then(function(data){
+        console.log(data[0]);
+        res.render('partials/new-ind', {title: 'Amber', user: req.user, type: data[0], alertas: data[1]})
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al cargar la plantilla'
+        })
+    })
 })
 
 /* New area */
 router.post('/area/new', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from alertas').then(function(data){
-       res.render('partials/new-area', {title: 'Amber', user: req.user, alertas: data})
+        res.render('partials/new-area', {title: 'Amber', user: req.user, alertas: data})
     }).catch(function(error){
         res.json({
             status: 'Error',
@@ -178,7 +193,7 @@ router.post('/area/register', isAuthenticated, function(req, res){
     console.log(req.body);
     db_conf.db.oneOrNone('insert into area (id_alert, area, areadesc, polygon, geocode) ' +
         'values ($1, $2, $3, $4, $5) returning id',[
-            req.body.id_alerta,
+        req.body.id_alerta,
         req.body.area,
         req.body.areadesc,
         req.body.polygon,
@@ -337,7 +352,7 @@ router.post('/resource/update', isAuthenticated, function(req, res){
     console.log(req.body);
     db_conf.db.oneOrNone('update resources set id_alert = $1, description = $2, mimetype = $3, ' +
         'rec_size = $4, uri = $5 where id = $6 returning id', [
-            req.body.id_alerta,
+        req.body.id_alerta,
         req.body.description,
         req.body.mimeType,
         req.body.size,

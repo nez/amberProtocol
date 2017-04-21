@@ -1,0 +1,84 @@
+<form>
+    <input type="text" class="form-control" name="type" value="<%=type%>" hidden>
+    <p>
+        <label>Nombre</label>
+        <input type="text" class="form-control" name="name" required placeholder="Nombre">
+    </p>
+    <p>
+        <label>Primer sobrenombre</label>
+        <input type="text" class="form-control" name="surname1" required>
+    </p>
+    <p>
+        <label>Segundo sobrenombre</label>
+        <input type="text" class="form-control" name="surname2" required>
+    </p>
+    <p>
+        <label>Fecha de nacimiento</label>
+        <input type="text" class="form-control" name="birthdate" required>
+    </p>
+    <p>
+        <label>Edad</label>
+        <input type="number" class="form-control" name="age" required>
+    </p>
+    <p>
+        <label>Género</label>
+        <input type="text" class="form-control" name="gender" required>
+    </p>
+    <p>
+        <label>Nacionalidad</label>
+        <input type="text" class="form-control" name="nationality" required>
+    </p>
+    <p>
+        <label>Tipo de cabello</label>
+        <input type="text" class="form-control" name="hairtype">
+    </p>
+    <p>
+        <label>Tipo de cabello</label>
+        <input type="text" class="form-control" name="haircolor">
+    </p>
+    <p>
+        <label>Tipo de cabello</label>
+        <input type="text" class="form-control" name="eyecolor">
+    </p>
+    <p>
+        <label>Estatura</label>
+        <input type="text" class="form-control" name="height">
+    </p>
+    <p>
+        <label>Peso</label>
+        <input type="text" class="form-control" name="weight">
+    </p>
+    <p>
+        <label>Complexión</label>
+        <input type="text" class="form-control" name="complex">
+    </p>
+    <p>
+        <label>Vestimenta</label>
+        <input type="text" class="form-control" name="wear">
+    </p>
+    <p>
+        <label>Razgos peculiares</label>
+        <input type="text" class="form-control" name="peculiar">
+    </p>
+    <p>
+        <label>Alerta a la que pertenece el recurso</label>
+        <select name = "id_alerta" class="form-control" required>
+            <%
+            if (alertas.length > 0 ){
+            for (var i =0; i < alertas.length; i++){
+            %>
+            <option value="<%= alertas[i].id %>"> <%= alertas[i].title %> </option>
+            <%
+            }
+            }else {
+            %>
+            <option value="">Ninguna</option>
+            <% }%>
+        </select>
+    </p>
+
+    <p>
+        <button class="btn btn-primary" type="submit">Registrar</button>
+    </p>
+
+</form>
