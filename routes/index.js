@@ -179,8 +179,38 @@ router.post('/ind/select-form', isAuthenticated, function(req, res){
 /* Ind register */
 router.post('/ind/register', isAuthenticated, function(req, res){
     console.log(req.body);
-    db_conf.db.oneOrNone('insert into victims (id_alert, name, surname1, surname2, birthdate, age, gender, nationality, hairtype, haricolor, eyecolor, height, weight, complex)')
-})
+    db_conf.db.oneOrNone('insert into victims (id_alert, name, surname1, surname2, birthdate, age, gender, nationality, ' +
+        'hairtype, haircolor, eyecolor, height, weight, complex, wear, peculiar) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, ' +
+        '$12, $13, $14, $15, $16) returning id', [
+        req.body.id_alerta,
+        req.body.name,
+        req.body.surname1,
+        req.body.surname2,
+        req.body.birthdate,
+        req.body.age,
+        req.body.gender,
+        req.body.nationality,
+        req.body.hairtype,
+        req.body.haircolor,
+        req.body.eyecolor,
+        req.body.height,
+        req.body.weight,
+        req.body.complex,
+        req.body.wear,
+        req.body.peculiar
+    ]).then(function(data){
+        res.json({
+            status: 'Ok',
+            message: 'El individuo ha sido registrado'
+        });
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al registrar al individuo'
+        });
+    });
+});
 
 /* New area */
 router.post('/area/new', isAuthenticated, function(req, res){
