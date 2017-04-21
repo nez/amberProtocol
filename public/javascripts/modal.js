@@ -278,7 +278,13 @@ function modalEvents(button, modal, page ) {
                     modal.find('#search_results').load('/alerts/results', $(this).serializeArray(), function(){
                         $('#search_results').find('.list-group-item').click(function(){
                             $('#search_results').load('/area/results', {id: $(this).data('alerts_id')}, function(){
-                                
+                                $('#search_results').find('.list-group-item').click(function(){
+                                    modal.find('#modal_content').load('/area/edit', {id: $(this).data('areas_id')}, function(){
+                                        modal.find('form').submit(function(e){
+                                            
+                                        })
+                                    })
+                                })
                             })
                         })
                     })

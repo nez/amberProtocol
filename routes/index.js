@@ -189,7 +189,6 @@ router.post('/area/register', isAuthenticated, function(req, res){
 
 /* Area results */
 router.post('/area/results', isAuthenticated, function(req, res){
-    console.log("AREA")
     console.log(req.body);
     db_conf.db.manyOrNone('select * from area where id_alert = $1', [
         req.body.id
@@ -204,6 +203,27 @@ router.post('/area/results', isAuthenticated, function(req, res){
         });
     });
 });
+
+/* Area edit */
+router.post('/area/edit', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.tx(function(t){
+        return this.batch([
+            this.oneOrNone('select * from area where id = $1', [
+                req.body.id
+            ]),
+            this.manyOrNone('select * from alertas')
+        ]).then(function(data){
+            res.render('partials/edit-area', {title: 'Amber', user: req.user, area: data[0], alertas: data[1]});
+        }).catch(function(error){
+            console.log(error);
+            res.json({
+                status: 'Error',
+                message: 'Ocurrió un error al buscar el área'
+            })
+        })
+    })
+})
 
 /* New Resource */
 router.post('/resource/new', isAuthenticated, function(req, res){

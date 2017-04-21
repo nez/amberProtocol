@@ -1,7 +1,7 @@
 <form>
     <p>
         <label>Área</label>
-        <input type="text" class="form-control" name="area" required placeholder="Nombre área"> <!-- Option list -->
+        <input type="text" class="form-control" name="area" required value="<%=area.area%>"> <!-- Option list -->
     </p>
     <p>
         <label>Alerta a la que pertenece el área</label>
@@ -10,7 +10,7 @@
             if (alertas.length > 0 ){
             for (var i =0; i < alertas.length; i++){
             %>
-            <option value="<%= alertas[i].id %>"> <%= alertas[i].title %> </option>
+            <option value="<%= alertas[i].id %>" <%= area.alert_id == alertas[i].id?'selected' : null %> > <%= alertas[i].title %> </option>
             <%
             }
             }else {
@@ -22,15 +22,15 @@
 
     <p>
         <label>Descripcion</label>
-        <textarea rows="5" name="areadesc" class = "form-control"></textarea>
+        <textarea rows="5" name="areadesc" class = "form-control"><%=area.areadesc%></textarea>
     </p>
     <p>
         <label>Polígono</label>
-        <input type="text" name="polygon" class = "form-control" placeholder="((x1, y1), (x2, y2), ..., (xn, yn))"></input>
+        <input type="text" name="polygon" class = "form-control" placeholder="((x1, y1), (x2, y2), ..., (xn, yn))" value="<%=area.polygon%>"></input>
     </p>
     <p>
         <label>Código geográfico</label>
-        <input type="text" name="geocode" class = "form-control"></input>
+        <input type="text" name="geocode" class = "form-control" value="<%=area.geocode%>"></input>
     </p>
 
 
