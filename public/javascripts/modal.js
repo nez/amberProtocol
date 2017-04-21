@@ -130,6 +130,15 @@ function modalEvents(button, modal, page ) {
                             format: 'YYYY-MM-DD',
                             defaultDate: new Date().setDate(new Date().getDate() - 1)
                         });
+                        modal.find('form').submit(function(e){
+                           $.post('/ind/register', $(this).serializeArray()).done(function(data){
+                               alert(data.message);
+                               if(data.status == 'Ok'){
+                                   modal.modal('hide');
+                               }
+                           });
+                           e.preventDefault();
+                        });
                     });
                     e.preventDefault();
                 });

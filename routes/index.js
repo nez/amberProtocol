@@ -176,6 +176,12 @@ router.post('/ind/select-form', isAuthenticated, function(req, res){
     })
 })
 
+/* Ind register */
+router.post('/ind/register', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.oneOrNone('insert into victims (id_alert, name, surname1, surname2, birthdate, age, gender, nationality, hairtype, haricolor, eyecolor, height, weight, complex)')
+})
+
 /* New area */
 router.post('/area/new', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from alertas').then(function(data){
