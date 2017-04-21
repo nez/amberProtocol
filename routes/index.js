@@ -151,6 +151,16 @@ router.get('/admin', isAuthenticated, function(req, res){
     res.render('administradorBeta', {title: 'Amber', user: req.user, section: 'administrador'})
 });
 
+/* Ind options */
+router.post('/ind/options', isAuthenticated, function(req, res){
+    res.render('partials/ind-options', {title: 'Amber', user: req.user})
+});
+
+/* Ind select */
+router.post('/ind/select-form', isAuthenticated, function(req, res){
+    console.log(req.body);
+})
+
 /* New area */
 router.post('/area/new', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from alertas').then(function(data){

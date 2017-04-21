@@ -117,6 +117,20 @@ function modalEvents(button, modal, page ) {
                 });
             });
             break;
+
+        // Person
+        case "new_ind":
+            modal.find('.modal-title').text('Registrar individuo');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/ind/options', {}, function(){
+                modal.find('form').submit(function(e){
+                    var ind_type = $('input[name=optradio]:checked').val();
+                    $.post('/ind/select-form', {ind_type: ind_type}).done(function(data){
+                        
+                    })
+                })
+            });
+            break;
         /*
          * -----------------------------------------------
          *  Edit Registers
