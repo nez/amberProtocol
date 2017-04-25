@@ -333,19 +333,15 @@ function modalEvents(button, modal, page ) {
                 modal.find('#find').submit(function(e){
                     modal.find('#search_results').load('/ind/results', $(this).serializeArray(), function(){
                         $('#search_results').find('.list-group-item').click(function(){
-                            $('#search_results').load('/area/results', {id: $(this).data('alerts_id')}, function(){
-                                $('#search_results').find('.list-group-item').click(function(){
-                                    modal.find('#modal_content').load('/area/edit', {id: $(this).data('areas_id')}, function(){
-                                        modal.find('form').submit(function(e){
-                                            $.post('/area/update', $(this).serializeArray()).done(function(data){
-                                                alert(data.message);
-                                                if(data.status == 'Ok'){
-                                                    modal.modal('hide');
-                                                }
-                                            });
-                                            e.preventDefault();
-                                        });
+                            modal.find('#modal_content').load('/ind/edit', {id: $(this).data('inds_id'), type: $(this).data('type')}, function(){
+                                modal.find('form').submit(function(e){
+                                    $.post('/ind/update', $(this).serializeArray()).done(function(data){
+                                        alert(data.message);
+                                        if(data.status == 'Ok'){
+                                            modal.modal('hide');
+                                        }
                                     });
+                                    e.preventDefault();
                                 });
                             });
                         });

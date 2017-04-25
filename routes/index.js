@@ -252,7 +252,7 @@ router.post('/ind/results', isAuthenticated, function(req, res){
         req.body.id_alerta,
         req.body.nombre
     ]).then(function(data){
-        res.render('partials/inds-results-view', {title: 'Amber', user: req.user, inds: data});
+        res.render('partials/inds-results-view', {title: 'Amber', user: req.user, inds: data, type: req.body.optradio});
     }).catch(function(error){
         console.log(error);
         res.json({
@@ -260,6 +260,19 @@ router.post('/ind/results', isAuthenticated, function(req, res){
             message: 'Ocurrió un error al buscar al individuo'
         })
     })
+})
+
+/* Ind Edit */
+router.post('/ind/edit', isAuthenticated, function(req, res){
+    console.log(req.body);
+    var query = 'select * from victims where id = $1'
+    if(req.body.type == 'suspect'){
+        query = 'select * from suspect where id = $1'
+    }
+    if(req.body.type == 'companion'){
+        query = 'select * from companion where id = $1'
+    }
+    /* Finish query */
 })
 
 /* New area */
