@@ -4,6 +4,12 @@
         <label>Nombre</label>
         <input type="text" class="form-control" name="name" required placeholder="Nombre">
     </p>
+    <%if(type != 'victime'){%>
+    <p>
+        <label>Alias</label>
+        <input type="text" class="form-control" name="alias" required placeholder="Alias">
+    </p>
+    <%}%>
     <p>
         <label>Primer sobrenombre</label>
         <input type="text" class="form-control" name="surname1" required>
@@ -34,6 +40,12 @@
             <option value="female">Femenino</option>
         </select>
     </p>
+    <%if(type != 'victime'){%>
+    <p>
+        <label>Parentezco con víctima</label>
+        <input type="text" class="form-control" name="kinship">
+    </p>
+    <%}%>
     <p>
         <label>Nacionalidad</label>
         <input type="text" class="form-control" name="nationality" required>
@@ -66,6 +78,12 @@
         <label>Vestimenta</label>
         <input type="text" class="form-control" name="wear">
     </p>
+    <%if(type != 'victime'){%>
+    <p>
+        <label>Vehículo</label>
+        <input type="text" class="form-control" name="vehicle">
+    </p>
+    <%}%>
     <p>
         <label>Razgos peculiares</label>
         <input type="text" class="form-control" name="peculiar">
