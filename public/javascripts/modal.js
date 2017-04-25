@@ -131,13 +131,13 @@ function modalEvents(button, modal, page ) {
                             defaultDate: new Date().setDate(new Date().getDate() - 1)
                         });
                         modal.find('form').submit(function(e){
-                           $.post('/ind/register', $(this).serializeArray()).done(function(data){
-                               alert(data.message);
-                               if(data.status == 'Ok'){
-                                   modal.modal('hide');
-                               }
-                           });
-                           e.preventDefault();
+                            $.post('/ind/register', $(this).serializeArray()).done(function(data){
+                                alert(data.message);
+                                if(data.status == 'Ok'){
+                                    modal.modal('hide');
+                                }
+                            });
+                            e.preventDefault();
                         });
                     });
                     e.preventDefault();
@@ -330,7 +330,12 @@ function modalEvents(button, modal, page ) {
             modal.find('.modal-title').text('Buscar Individuo');
             modal.find('#modal_content').html("");
             modal.find('#modal_content').load('/ind/find-ind-view', {}, function(){
+                modal.find('#find').submit(function(e){
+                    modal.find('#search_results').load('/ind/results', $(this).serializeArray(), function(){
 
+                    });
+                });
+                e.preventDefault();
             });
             break;
     }

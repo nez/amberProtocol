@@ -238,6 +238,11 @@ router.post('/ind/find-ind-view', isAuthenticated, function(req, res){
    })
 });
 
+/* Results ind */
+router.post('/ind/results', isAuthenticated, function(req, res){
+    console.log(req.body);
+})
+
 /* New area */
 router.post('/area/new', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from alertas').then(function(data){
