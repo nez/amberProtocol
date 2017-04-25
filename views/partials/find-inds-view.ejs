@@ -1,0 +1,46 @@
+<form id="find">
+
+    <p>
+        <label>Tipo de individuo</label>
+        <div class="col-sm-12">
+            <label class="radio-inline">
+                <input type="radio" name="optradio" value="victime"><strong>Víctima</strong>
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="optradio" value="companion"><strong>Acompañante</strong>
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="optradio" value="suspect"><strong>Sospechoso</strong>
+            </label>
+            <br><br>
+        </div>
+    </p>
+
+    <hr>
+
+    <p>
+        <label>Nombre individuo</label>
+        <p>
+            <input type="text" class="form-control" name="nombre" value="Nombre...">
+        </p>
+    </p>
+
+
+    <p>
+        <label>Alerta</label>
+        <select class="form-control" name = "id_alerta">
+            <%if(alertas.length > 0) {for (var i=0; i< alertas.length; i ++){%>
+            <option value="<%= alertas[i].id %>"><%=alertas[i].title%></option>
+            <%}}%>
+        </select>
+        <br><br>
+    </p>
+
+
+    <p>
+        <button type="submit" class="btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
+    </p>
+</form>
+<br>
+<div id = "search_results">
+</div>

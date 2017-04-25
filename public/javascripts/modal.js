@@ -324,6 +324,15 @@ function modalEvents(button, modal, page ) {
                     e.preventDefault();
                 });
             });
+            break;
+        // Individuals
+        case "edit_ind":
+            modal.find('.modal-title').text('Buscar Individuo');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/ind/find-ind-view', {}, function(){
+
+            });
+            break;
     }
 }
 

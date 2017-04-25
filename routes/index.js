@@ -225,6 +225,19 @@ router.post('/ind/register', isAuthenticated, function(req, res){
     });
 });
 
+/* Find ind */
+router.post('/ind/find-ind-view', isAuthenticated, function(req, res){
+   db_conf.db.manyOrNone('select * from alertas').then(function(data){
+       res.render('partials/find-inds-view', {title: 'Amber', user: req.user, alertas: data});
+   }).catch(function(error){
+       console.log(error);
+       res.json({
+           status: 'Error',
+           message: 'Ocurrió un error al levantar la vista'
+       })
+   })
+});
+
 /* New area */
 router.post('/area/new', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from alertas').then(function(data){
