@@ -179,9 +179,19 @@ router.post('/ind/select-form', isAuthenticated, function(req, res){
 /* Ind register */
 router.post('/ind/register', isAuthenticated, function(req, res){
     console.log(req.body);
-    db_conf.db.oneOrNone('insert into victims (id_alert, name, surname1, surname2, birthdate, age, gender, nationality, ' +
+    query = 'insert into victims (id_alert, name, surname1, surname2, birthdate, age, gender, nationality, ' +
         'hairtype, haircolor, eyecolor, height, weight, complex, wear, peculiar) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, ' +
-        '$12, $13, $14, $15, $16) returning id', [
+        '$12, $13, $14, $15, $16) returning id'
+    if(req.body.type == 'companion'){
+        query = 'insert into companion (id_alert, name, surname1, surname2, birthdate, age, gender, nationality, ' +
+            'hairtype, haircolor, eyecolor, height, weight, complex, wear, peculiar, alias, kinship, vehicle) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, ' +
+            '$12, $13, $14, $15, $16, $17, $18, $19) returning id'
+    }else if(req.body.type == 'suspect'){
+        query = 'insert into suspect (id_alert, name, surname1, surname2, birthdate, age, gender, nationality, ' +
+            'hairtype, haircolor, eyecolor, height, weight, complex, wear, peculiar, alias, kinship, vehicle) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, ' +
+            '$12, $13, $14, $15, $16, $17, $18, $19) returning id'
+    }
+    db_conf.db.oneOrNone(query, [
         req.body.id_alerta,
         req.body.name,
         req.body.surname1,
@@ -197,7 +207,10 @@ router.post('/ind/register', isAuthenticated, function(req, res){
         req.body.weight,
         req.body.complex,
         req.body.wear,
-        req.body.peculiar
+        req.body.peculiar,
+        req.body.alias,
+        req.body.kinship,
+        req.body.vehicle
     ]).then(function(data){
         res.json({
             status: 'Ok',
