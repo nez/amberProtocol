@@ -190,8 +190,8 @@ create table companion(
 );
 
 /* Suspect :: Alerta */
-drop table if exists companion cascade;
-create table companion(
+drop table if exists suspect cascade;
+create table suspect(
   id serial primary key,
     id_alert integer references alertas(id),
     alias    text,
