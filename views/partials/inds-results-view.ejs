@@ -1,0 +1,16 @@
+<%
+if (inds.length > 0){%>
+<label>Resultados</label>
+<div class="list-group">
+    <% for ( var i =0; i < inds.length ; i++ ){ %>
+    <a href="#" class="list-group-item"  data-inds_id="<%= inds[i].id %>">
+        <h4 class="list-group-item-heading"><strong>ID: <span style="color:#a6192e"><%=inds[i].id%></span></strong></h4>
+        <h4> <%= inds[i].name %> </h4>
+        <p class="list-group-item-text"> <strong>Sobrenombre:</strong> <%= inds[i].surname1 %></p>
+    </a>
+    <%}%>
+</div>
+
+<%}else {%>
+<div class="alert alert-info" role="alert">No hay individuos registrados</div>
+<%}%>

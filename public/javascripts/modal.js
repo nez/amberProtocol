@@ -327,15 +327,31 @@ function modalEvents(button, modal, page ) {
             break;
         // Individuals
         case "edit_ind":
-            modal.find('.modal-title').text('Buscar Individuo');
+            modal.find('.modal-title').text('Buscar alerta');
             modal.find('#modal_content').html("");
-            modal.find('#modal_content').load('/ind/find-ind-view', {}, function(){
+            modal.find('#modal_content').load('/ind/find-ind-view', {}, function () {
                 modal.find('#find').submit(function(e){
                     modal.find('#search_results').load('/ind/results', $(this).serializeArray(), function(){
-
+                        $('#search_results').find('.list-group-item').click(function(){
+                            $('#search_results').load('/area/results', {id: $(this).data('alerts_id')}, function(){
+                                $('#search_results').find('.list-group-item').click(function(){
+                                    modal.find('#modal_content').load('/area/edit', {id: $(this).data('areas_id')}, function(){
+                                        modal.find('form').submit(function(e){
+                                            $.post('/area/update', $(this).serializeArray()).done(function(data){
+                                                alert(data.message);
+                                                if(data.status == 'Ok'){
+                                                    modal.modal('hide');
+                                                }
+                                            });
+                                            e.preventDefault();
+                                        });
+                                    });
+                                });
+                            });
+                        });
                     });
+                    e.preventDefault();
                 });
-                e.preventDefault();
             });
             break;
     }

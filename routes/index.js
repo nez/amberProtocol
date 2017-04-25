@@ -179,7 +179,7 @@ router.post('/ind/select-form', isAuthenticated, function(req, res){
 /* Ind register */
 router.post('/ind/register', isAuthenticated, function(req, res){
     console.log(req.body);
-    query = 'insert into victims (id_alert, name, surname1, surname2, birthdate, age, gender, nationality, ' +
+    var query = 'insert into victims (id_alert, name, surname1, surname2, birthdate, age, gender, nationality, ' +
         'hairtype, haircolor, eyecolor, height, weight, complex, wear, peculiar) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, ' +
         '$12, $13, $14, $15, $16) returning id'
     if(req.body.type == 'companion'){
@@ -241,6 +241,25 @@ router.post('/ind/find-ind-view', isAuthenticated, function(req, res){
 /* Results ind */
 router.post('/ind/results', isAuthenticated, function(req, res){
     console.log(req.body);
+    var query = "select * from victims where id_alert = $1 and name ilike '%$2#%'";
+    if(req.body.optradio == 'companion'){
+        query = "select * from companion where id_alert = $1 and name ilike '%$2#%'";
+    }
+    if(req.body.optradio == 'suspect'){
+        query = "select * from suspect where id_alert = $1 and name ilike '%$2#%'";
+    }
+    db_conf.db.manyOrNone(query, [
+        req.body.id_alerta,
+        req.body.nombre
+    ]).then(function(data){
+        res.render('partials/inds-results-view', {title: 'Amber', user: req.user, inds: data});
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al buscar al individuo'
+        })
+    })
 })
 
 /* New area */
