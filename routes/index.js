@@ -257,25 +257,23 @@ router.post('/event/edit', isAuthenticated, function(req, res){
 router.post('/event/update', isAuthenticated, function(req, res){
     console.log(req.body);
     db_conf.db.oneOrNone('update event set id_alert = $1, edate = $2, victimnumber = $3, companionnumber = $4, ' +
-        'suspectnumber = $5, eventdesc = $6, expiration = $7, latitude = $7, longitude = $8, roadtype = $9, ' +
-        'roadname = $10, highway = $11, backroad = $12, exteriornumber = $13, interiornumber = $14, settlementtype = $15,' +
-        ' postalcode = $16, localityname = $17, localitycode = $18, municipalityname = $19, municipalitycode = $20, ' +
-        'statename = $21, statecode = $22, perpendiculars = $23, parallel = $24, landmarks = $25 where id = $26 returning id', [
+        'suspectnumber = $5, eventdesc = $6, expiration = $7, latitude = $8, longitude = $9, roadtype = $10, ' +
+        'roadname = $11, exteriornumber = $12, interiornumber = $13, settlementtype = $14,' +
+        ' postalcode = $15, localityname = $16, localitycode = $17, municipalityname = $18, municipalitycode = $19, ' +
+        'statename = $20, statecode = $21, perpendiculars = $22, parallel = $23, landmarks = $24 where id = $25 returning id', [
             req.body.id_alert,
             new Date(req.body.edate),
-        parseInt(req.body.victimnumber),
-        parseInt(req.body.companionnumber),
-        parseInt(req.body.suspectnumber),
+       numericCol(req.body.victimnumber),
+       numericCol(req.body.companionnumber),
+       numericCol(req.body.suspectnumber),
         req.body.eventdesc,
         new Date(req.body.expiration),
         numericCol(req.body.latitude),
         numericCol(req.body.longitude),
         req.body.roadtype,
         req.body.roadname,
-        req.body.highway,
-        req.body.backroad,
-        parseInt(req.body.exteriornumber),
-        parseInt(req.body.interiornumber),
+       numericCol(req.body.exteriornumber),
+       numericCol(req.body.interiornumber),
         req.body.settlementtype,
         req.body.postalcode,
         req.body.localityname,
