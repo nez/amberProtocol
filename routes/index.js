@@ -176,8 +176,8 @@ router.post('/event/register', isAuthenticated, function(req, res){
     db_conf.db.oneOrNone('insert into event (id_alert, edate, victimnumber, companionnumber, suspectnumber, eventdesc,' +
         ' expiration, latitude, longitude, roadtype, roadname, exteriornumber, interiornumber, settlementtype, ' +
         'settlementname, postalcode, municipalityname, municipalitycode, statename, statecode, perpendiculars, parallel,' +
-        'landmarks) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, ' +
-        '$21, $22, $23) returning id',[
+        'landmarks, localityname, localitycode) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, ' +
+        '$21, $22, $23, $24, $25) returning id',[
             req.body.id_alerta,
         req.body.edate,
         req.body.victimnumber,
@@ -200,7 +200,9 @@ router.post('/event/register', isAuthenticated, function(req, res){
         req.body.statecode,
         req.body.perpendiculars,
         req.body.parallel,
-        req.body.landmarks
+        req.body.landmarks,
+        req.body.localityname,
+        req.body.localitycode
     ]).then(function(data){
         res.json({
             status: 'Ok',
@@ -239,7 +241,7 @@ router.post('/event/edit', isAuthenticated, function(req, res){
             this.oneOrNone('select * from event where id = $1', [
                 req.body.id
             ]),
-            this.manyOrNone('select * from alertas');
+            this.manyOrNone('select * from alertas')
         ])
     }).then(function(data){
         res.render('partials/edit-event', {title: 'Amber', user: req.user, event: data[0], alertas: data[1]})
