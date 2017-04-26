@@ -1,10 +1,6 @@
 <form>
     <p>
-        <label>Área</label>
-        <input type="text" class="form-control" name="area" required placeholder="Nombre área"> <!-- Option list -->
-    </p>
-    <p>
-        <label>Alerta a la que pertenece el área</label>
+        <label>Alerta a la que pertenece el evento</label>
         <select name = "id_alerta" class="form-control" required>
             <%
             if (alertas.length > 0 ){
@@ -34,7 +30,7 @@
 
     <p>
         <label>Número de víctimas</label>
-        <input type="number" name="victinumber" class = "form-control"></input>
+        <input type="number" name="victimnumber" class = "form-control"></input>
     </p>
 
     <p>
@@ -45,11 +41,6 @@
     <p>
         <label>Descripcion</label>
         <textarea rows="5" name="eventdesc" class = "form-control"></textarea>
-    </p>
-
-    <p>
-        <label>Número de víctimas</label>
-        <input type="number" name="victinumber" class = "form-control"></input>
     </p>
 
     <p>
@@ -107,7 +98,43 @@
         <label>Código postal</label>
         <input type="text" name="postalcode" class = "form-control"></input>
     </p>
+    <p>
+        <label>Nombre localidad</label>
+        <input type="text" name="localityname" class = "form-control"></input>
+    </p>
 
+    <p>
+        <label>Código localidad</label>
+        <input type="text" name="localitycode" class = "form-control"></input>
+    </p>
+    <p>
+        <label>Nombre municipalidad</label>
+        <input type="text" name="municipalityname" class = "form-control"></input>
+    </p>
+    <p>
+        <label>Código municipalidad</label>
+        <input type="text" name="municipalitycode" class = "form-control"></input>
+    </p>
+    <p>
+        <label>Nombre estado</label>
+        <input type="text" name="statename" class = "form-control"></input>
+    </p>
+    <p>
+        <label>Código estado</label>
+        <input type="text" name="statecode" class = "form-control"></input>
+    </p>
+    <p>
+        <label>Calles paralelas</label>
+        <textarea rows="5" name="parallel" class = "form-control"></textarea>
+    </p>
+    <p>
+        <label>Calles perpendiculares</label>
+        <textarea rows="5" name="perpendiculars" class = "form-control"></textarea>
+    </p>
+    <p>
+        <label>Referenicas</label>
+        <textarea rows="5" name="landmarks" class = "form-control"></textarea>
+    </p>
     <p>
         <button class="btn btn-primary" type="submit">Registrar</button>
     </p>
