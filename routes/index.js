@@ -215,6 +215,22 @@ router.post('/event/register', isAuthenticated, function(req, res){
     })
 })
 
+/* Events results */
+router.post('/events/results', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.manyOrNone('select * from event where id = $1', [
+        req.body.id
+    ]).then(function(data){
+        res.render('partials/event-results-view', {title: 'Amber', user: req.user, events: data})
+    }).catch(function(error){
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al cargar la vista'
+        })
+    })
+
+})
+
 
 /* Ind select */
 router.post('/ind/select-form', isAuthenticated, function(req, res){

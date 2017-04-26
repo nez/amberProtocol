@@ -1,0 +1,16 @@
+<%
+if (events.length > 0){%>
+<label>Resultados</label>
+<div class="list-group">
+    <% for ( var i =0; i < events.length ; i++ ){ %>
+    <a href="#" class="list-group-item"  data-events_id="<%= events[i].id %>">
+        <h4 class="list-group-item-heading"><strong>ID: <span style="color:#a6192e"><%=events[i].id%></span></strong></h4>
+        <h4> <%= events[i].edate %> </h4>
+        <p class="list-group-item-text"> <strong>Número de víctimas:</strong> <%= events[i].victimnumber %></p>
+    </a>
+    <%}%>
+</div>
+
+<%}else {%>
+<div class="alert alert-info" role="alert">No hay eventos registrados</div>
+<%}%>
