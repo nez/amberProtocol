@@ -253,6 +253,55 @@ router.post('/event/edit', isAuthenticated, function(req, res){
     })
 })
 
+/* Event update */
+router.post('/event/update', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.oneOrNone('update event set id_alert = $1, edate = $2, victimnumber = $3, companionnumber = $4, ' +
+        'suspectnumber = $5, eventdesc = $6, expiration = $7, latitude = $7, longitude = $8, roadtype = $9, ' +
+        'roadname = $10, highway = $11, backroad = $12, exteriornumber = $13, interiornumber = $14, settlementtype = $15,' +
+        ' postalcode = $16, localityname = $17, localitycode = $18, municipalityname = $19, municipalitycode = $20, ' +
+        'statename = $21, statecode = $22, perpendiculars = $23, parallel = $24, landmarks = $25 where id = $26 returning id', [
+            req.body.id_alert,
+            new Date(req.body.edate),
+        parseInt(req.body.victimnumber),
+        parseInt(req.body.companionnumber),
+        parseInt(req.body.suspectnumber),
+        req.body.eventdesc,
+        new Date(req.body.expiration),
+        numericCol(req.body.latitude),
+        numericCol(req.body.longitude),
+        req.body.roadtype,
+        req.body.roadname,
+        req.body.highway,
+        req.body.backroad,
+        parseInt(req.body.exteriornumber),
+        parseInt(req.body.interiornumber),
+        req.body.settlementtype,
+        req.body.postalcode,
+        req.body.localityname,
+        req.body.localitycode,
+        req.body.municipalityname,
+        req.body.municipalitycode,
+        req.body.statename,
+        req.body.statecode,
+        req.body.perpendiculars,
+        req.body.parallel,
+        req.body.landmarks,
+        req.body.id
+    ]).then(function(data){
+        res.json({
+            status: 'Ok',
+            message: 'Se han actualizado los campos del evento'
+        })
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al actualizar los campos del evento'
+        })
+    })
+})
+
 /* Ind select */
 router.post('/ind/select-form', isAuthenticated, function(req, res){
     console.log(req.body);
@@ -407,7 +456,7 @@ router.post('/ind/update', isAuthenticated, function(req, res){
             'complex = $14, wear = $15, peculiar = $16, alias = $18, kinship = $19, vehicle = $20 where id = $17 returning id'
     }
     db_conf.db.oneOrNone(query, [
-        req.body.id_alert,
+        req.body.id_alerta,
         req.body.name,
         req.body.surname1,
         req.body.surname2,

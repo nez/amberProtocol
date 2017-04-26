@@ -395,7 +395,7 @@ function modalEvents(button, modal, page ) {
                                 $('#search_results').find('.list-group-item').click(function(){
                                     modal.find('#modal_content').load('/event/edit', {id: $(this).data('events_id')}, function(){
                                         modal.find('form').submit(function(e){
-                                            $.post('/area/update', $(this).serializeArray()).done(function(data){
+                                            $.post('/event/update', $(this).serializeArray()).done(function(data){
                                                 alert(data.message);
                                                 if(data.status == 'Ok'){
                                                     modal.modal('hide');
