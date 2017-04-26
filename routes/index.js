@@ -231,6 +231,25 @@ router.post('/events/results', isAuthenticated, function(req, res){
 
 })
 
+/* Event edit */
+router.post('/event/edit', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.task(function(t){
+        return t.batch([
+            this.oneOrNone('select * from event where id = $1', [
+                req.body.id
+            ]),
+            this.manyOrNone('select * from alertas');
+        ])
+    }).then(function(data){
+        res.render('partials/edit-event', {title: 'Amber', user: req.user, event: data[0], alertas: data[1]})
+    }).catch(function(error){
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al cargar la vista'
+        })
+    })
+})
 
 /* Ind select */
 router.post('/ind/select-form', isAuthenticated, function(req, res){
