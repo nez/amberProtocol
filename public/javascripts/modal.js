@@ -150,7 +150,11 @@ function modalEvents(button, modal, page ) {
             modal.find('.modal-title').text('Registrar evento');
             modal.find('#modal_content').html("");
             modal.find('#modal_content').load('/event/new', {}, function(){
-                $('#event_datepicker').datetimepicker({
+                $('#event_datepicker1').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    defaultDate: new Date().setDate(new Date().getDate() - 1)
+                });
+                $('#event_datepicker2').datetimepicker({
                     format: 'YYYY-MM-DD',
                     defaultDate: new Date().setDate(new Date().getDate() - 1)
                 });

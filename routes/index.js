@@ -171,9 +171,9 @@ router.post('/event/new', isAuthenticated, function(req, res){
 });
 
 /* Event register */
-router.post('event/register', isAuthenticated, function(req, res){
+router.post('/event/register', isAuthenticated, function(req, res){
     console.log(req.body);
-    db_conf.db.oneOrNone('insert into event (id_alerta, edate, victimnumber, companionnumber, suspectnumber, eventdesc,' +
+    db_conf.db.oneOrNone('insert into event (id_alert, edate, victimnumber, companionnumber, suspectnumber, eventdesc,' +
         ' expiration, latitude, longitude, roadtype, roadname, exteriornumber, interiornumber, settlementtype, ' +
         'settlementname, postalcode, municipalityname, municipalitycode, statename, statecode, perpendiculars, parallel,' +
         'landmarks) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, ' +
