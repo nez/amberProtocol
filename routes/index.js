@@ -272,7 +272,76 @@ router.post('/ind/edit', isAuthenticated, function(req, res){
     if(req.body.type == 'companion'){
         query = 'select * from companion where id = $1'
     }
-    /* Finish query */
+    db_conf.db.task(function(t){
+        return t.batch([
+            t.manyOrNone('select * from alertas'),
+            t.oneOrNone(query, [
+                req.body.id
+            ])
+        ])
+    }).then(function(data){
+        res.render('partials/edit-ind', {title: 'Amber', user: req.user, ind: data[1], alertas: data[0], type: req.body.type})
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al cargar la vista'
+        });
+    });
+});
+
+
+/* Ind Update */
+router.post('/ind/update', isAuthenticated, function(req, res){
+    console.log(req.body);
+    var query = 'update victims set id_alert = $1, name = $2, surname1 = $3, surname2 = $4, birthdate = $5, age = $6, ' +
+        'gender = $7, nationality = $8, hairtype = $9, haircolor = $10, eyecolor = $11, height = $12, weight = $13, ' +
+        'complex = $14, wear = $15, peculiar = $16 where id = $17 returning id'
+
+    if(req.body.type == 'companion'){
+        query = 'update companion set id_alert = $1, name = $2, surname1 = $3, surname2 = $4, birthdate = $5, age = $6, ' +
+            'gender = $7, nationality = $8, hairtype = $9, haircolor = $10, eyecolor = $11, height = $12, weight = $13, ' +
+            'complex = $14, wear = $15, peculiar = $16, alias = $18, kinship = $19, vehicle = $20 where id = $17 returning id'
+    }
+
+    if(req.body.type == 'suspect'){
+        query = 'update suspect set id_alert = $1, name = $2, surname1 = $3, surname2 = $4, birthdate = $5, age = $6, ' +
+            'gender = $7, nationality = $8, hairtype = $9, haircolor = $10, eyecolor = $11, height = $12, weight = $13, ' +
+            'complex = $14, wear = $15, peculiar = $16, alias = $18, kinship = $19, vehicle = $20 where id = $17 returning id'
+    }
+    db_conf.db.oneOrNone(query, [
+        req.body.id_alert,
+        req.body.name,
+        req.body.surname1,
+        req.body.surname2,
+        new Date(req.body.birthdate),
+        req.body.age,
+        req.body.gender,
+        req.body.nationality,
+        req.body.hairtype,
+        req.body.haircolor,
+        req.body.eyecolor,
+        req.body.height,
+        req.body.weight,
+        req.body.complex,
+        req.body.wear,
+        req.body.pecualiar,
+        req.body.id,
+        req.body.alias,
+        req.body.kinship,
+        req.body.vehicle
+    ]).then(function(data){
+        res.json({
+            status: 'Ok',
+            message: 'Se han actualizado los datos de el individuo'
+        })
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un erro al actualizar los datos del individuo'
+        })
+    })
 })
 
 /* New area */

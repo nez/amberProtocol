@@ -1,7 +1,6 @@
 <%
 if (inds.length > 0){%>
 <label>Resultados</label>
-<input type="text" class="form-control" name="type" value="<%=type%>" hidden>
 <div class="list-group">
     <% for ( var i =0; i < inds.length ; i++ ){ %>
     <a href="#" class="list-group-item"  data-inds_id="<%= inds[i].id %>" data-type="<%= type%>">

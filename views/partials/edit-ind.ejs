@@ -1,0 +1,112 @@
+<form>
+    <input type="text" value="<%=type%>" name="type" hidden>
+    <p>
+        <label>Nombre</label>
+        <input type="text" class="form-control" name="name" required placeholder="Nombre" value="<%=ind.name%>">
+    </p>
+    <%if(type != 'victime'){%>
+    <p>
+        <label>Alias</label>
+        <input type="text" class="form-control" name="alias" required placeholder="Alias" value="<%=ind.alias%>">
+    </p>
+    <%}%>
+    <p>
+        <label>Primer sobrenombre</label>
+        <input type="text" class="form-control" name="surname1" required value="<%=ind.surname1%>">
+    </p>
+    <p>
+        <label>Segundo sobrenombre</label>
+        <input type="text" class="form-control" name="surname2" required value="<%=ind.surname2%>">
+    </p>
+    <p>
+        <label>Fecha de nacimiento</label>
+    <div class="form-group">
+        <div class='input-group'>
+            <input type="text" name="birthdate" id="ind_datepicker" class="form-control" required value="<%=ind.birthdate%>">
+            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+        </div>
+    </div>
+    </p>
+    <p>
+        <label>Edad</label>
+        <input type="number" class="form-control" name="age" required value="<%=ind.age%>">
+    </p>
+    <p>
+        <label>Género</label>
+        <select class="form-control" name="gender" required value="<%=ind.gender%>">
+            <option value="male" selected>Masculino</option>
+            <option value="female">Femenino</option>
+        </select>
+    </p>
+    <%if(type != 'victime'){%>
+    <p>
+        <label>Parentezco con víctima</label>
+        <input type="text" class="form-control" name="kinship" value="<%=ind.kinship%>">
+    </p>
+    <%}%>
+    <p>
+        <label>Nacionalidad</label>
+        <input type="text" class="form-control" name="nationality" required value="<%=ind.nationality%>">
+    </p>
+    <p>
+        <label>Tipo de cabello</label>
+        <input type="text" class="form-control" name="hairtype" value="<%=ind.hairtype%>">
+    </p>
+    <p>
+        <label>Color  de cabello</label>
+        <input type="text" class="form-control" name="haircolor" value="<%=ind.haircolor%>">
+    </p>
+    <p>
+        <label>Color de ojos</label>
+        <input type="text" class="form-control" name="eyecolor" value="<%=ind.eyecolor%>">
+    </p>
+    <p>
+        <label>Estatura</label>
+        <input type="text" class="form-control" name="height" value="<%=ind.height%>">
+    </p>
+    <p>
+        <label>Peso</label>
+        <input type="text" class="form-control" name="weight" value="<%=ind.weight%>">
+    </p>
+    <p>
+        <label>Complexión</label>
+        <input type="text" class="form-control" name="complex" value="<%=ind.complex%>">
+    </p>
+    <p>
+        <label>Vestimenta</label>
+        <input type="text" class="form-control" name="wear" value="<%=ind.wear%>">
+    </p>
+    <%if(type != 'victime'){%>
+    <p>
+        <label>Vehículo</label>
+        <input type="text" class="form-control" name="vehicle" value="<%=ind.vehicle%>">
+    </p>
+    <%}%>
+    <p>
+        <label>Razgos peculiares</label>
+        <input type="text" class="form-control" name="peculiar" value="<%=ind.peculiar%>">
+    </p>
+    <p>
+        <label>Alerta a la que pertenece el individuo</label>
+        <select name = "id_alerta" class="form-control" required>
+            <%
+            if (alertas.length > 0 ){
+            for (var i =0; i < alertas.length; i++){
+            %>
+            <option value="<%= alertas[i].id %>" <%= ind.alert_id == alertas[i].id?'selected' : null %> > <%= alertas[i].title %> </option>
+            <%
+            }
+            }else {
+            %>
+            <option value="">Ninguna</option>
+            <% }%>
+        </select>
+    </p>
+
+    <p>
+        <button class="btn btn-primary" type="submit">Registrar</button>
+    </p>
+
+</form>
