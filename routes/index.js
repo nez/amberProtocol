@@ -170,6 +170,52 @@ router.post('/event/new', isAuthenticated, function(req, res){
    })
 });
 
+/* Event register */
+router.post('event/register', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.oneOrNone('insert into event (id_alerta, edate, victimnumber, companionnumber, suspectnumber, eventdesc,' +
+        ' expiration, latitude, longitude, roadtype, roadname, exteriornumber, interiornumber, settlementtype, ' +
+        'settlementname, postalcode, municipalityname, municipalitycode, statename, statecode, perpendiculars, parallel,' +
+        'landmarks) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, ' +
+        '$21, $22, $23) returning id',[
+            req.body.id_alerta,
+        req.body.edate,
+        req.body.victimnumber,
+        req.body.companionnumber,
+        req.body.suspectnumber,
+        req.body.eventdesc,
+        req.body.expiration,
+        req.body.latitude,
+        req.body.longitude,
+        req.body.roadtype,
+        req.body.roadname,
+        req.body.exteriornumber,
+        req.body.interiornumber,
+        req.body.settlementtype,
+        req.body.settlementname,
+        req.body.postalcode,
+        req.body.municipalityname,
+        req.body.municipalitycode,
+        req.body.statename,
+        req.body.statecode,
+        req.body.perpendiculars,
+        req.body.parallel,
+        req.body.landmarks
+    ]).then(function(data){
+        res.json({
+            status: 'Ok',
+            message: 'El evento ha sido de alta exitosamente.'
+        })
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'error',
+            message: 'Ocurrió un error al registrar el evento'
+        })
+    })
+})
+
+
 /* Ind select */
 router.post('/ind/select-form', isAuthenticated, function(req, res){
     console.log(req.body);
