@@ -118,7 +118,7 @@ function modalEvents(button, modal, page ) {
             });
             break;
 
-        // Person
+        // Individuals
         case "new_ind":
             modal.find('.modal-title').text('Registrar individuo');
             modal.find('#modal_content').html("");
@@ -139,6 +139,27 @@ function modalEvents(button, modal, page ) {
                             });
                             e.preventDefault();
                         });
+                    });
+                    e.preventDefault();
+                });
+            });
+            break;
+
+        // Events
+        case "new_event":
+            modal.find('.modal-title').text('Registrar evento');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/event/new', {}, function(){
+                $('#event_datepicker').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    defaultDate: new Date().setDate(new Date().getDate() - 1)
+                });
+                modal.find('form').submit(function(e){
+                    $.post('/event/register', $(this).serializeArray()).done(function(data){
+                        alert(data.message);
+                        if(data.status == 'Ok'){
+                            modal.modal('hide');
+                        }
                     });
                     e.preventDefault();
                 });

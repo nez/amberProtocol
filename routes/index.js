@@ -156,6 +156,20 @@ router.post('/ind/options', isAuthenticated, function(req, res){
     res.render('partials/ind-options', {title: 'Amber', user: req.user})
 });
 
+
+/* Event new */
+router.post('/event/new', isAuthenticated, function(req, res){
+   db_conf.db.manyOrNone('select * from alertas').then(function(data){
+       res.render('partials/new-event', {title: 'Amber', user: req.user, alertas: data})
+   }).catch(function(error){
+       console.log(error);
+       res.json({
+           status: 'Error',
+           message: 'Ocurrió un error al cargar la vista'
+       })
+   })
+});
+
 /* Ind select */
 router.post('/ind/select-form', isAuthenticated, function(req, res){
     console.log(req.body);

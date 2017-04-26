@@ -1,0 +1,115 @@
+<form>
+    <p>
+        <label>Área</label>
+        <input type="text" class="form-control" name="area" required placeholder="Nombre área"> <!-- Option list -->
+    </p>
+    <p>
+        <label>Alerta a la que pertenece el área</label>
+        <select name = "id_alerta" class="form-control" required>
+            <%
+            if (alertas.length > 0 ){
+            for (var i =0; i < alertas.length; i++){
+            %>
+            <option value="<%= alertas[i].id %>"> <%= alertas[i].title %> </option>
+            <%
+            }
+            }else {
+            %>
+            <option value="">Ninguna</option>
+            <% }%>
+        </select>
+    </p>
+
+    <p>
+        <label>Fecha del evento</label>
+    <div class="form-group">
+        <div class='input-group'>
+            <input type="text" name="edate" id="event_datepicker" class="form-control" required>
+            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+        </div>
+    </div>
+    </p>
+
+    <p>
+        <label>Número de víctimas</label>
+        <input type="number" name="victinumber" class = "form-control"></input>
+    </p>
+
+    <p>
+        <label>Número de sospechosos</label>
+        <input type="number" name="suspectnumber" class = "form-control"></input>
+    </p>
+
+    <p>
+        <label>Descripcion</label>
+        <textarea rows="5" name="eventdesc" class = "form-control"></textarea>
+    </p>
+
+    <p>
+        <label>Número de víctimas</label>
+        <input type="number" name="victinumber" class = "form-control"></input>
+    </p>
+
+    <p>
+        <label>Valido hasta</label>
+    <div class="form-group">
+        <div class='input-group'>
+            <input type="text" name="expiration" id="event_datepicker" class="form-control" required>
+            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+        </div>
+    </div>
+    </p>
+
+    <p>
+        <label>Longitud</label>
+        <input type="number" name="longitude" class = "form-control"></input>
+    </p>
+
+    <p>
+        <label>Latitud</label>
+        <input type="number" name="latitude" class = "form-control"></input>
+    </p>
+
+    <p>
+        <label>Tipo de vialidad</label>
+        <input type="text" name="roadtype" class = "form-control"></input>
+    </p>
+
+    <p>
+        <label> Nombre de la vialidad</label>
+        <input type="text" name="roadname" class = "form-control"></input>
+    </p>
+
+    <p>
+        <label>Número exterior</label>
+        <input type="number" name="exteriornumber" class = "form-control"></input>
+    </p>
+
+    <p>
+        <label>Número interior</label>
+        <input type="number" name="interiornumber" class = "form-control"></input>
+    </p>
+
+    <p>
+        <label>Tipo de asentamiento</label>
+        <input type="text" name="settlementtype" class = "form-control"></input>
+    </p>
+
+    <p>
+        <label>Nombre de asentamiento</label>
+        <input type="text" name="settlementname" class = "form-control"></input>
+    </p>
+    <p>
+        <label>Código postal</label>
+        <input type="text" name="postalcode" class = "form-control"></input>
+    </p>
+
+    <p>
+        <button class="btn btn-primary" type="submit">Registrar</button>
+    </p>
+
+</form>
