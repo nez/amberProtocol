@@ -898,6 +898,12 @@ router.post('/alert/update', isAuthenticated, function(req, res){
     })
 })
 
+/* XML ALERT */
+/* Admin */
+router.get('/xmlAlerta', isAuthenticated, function(req, res){
+    res.render('xmlBeta', {title: 'Amber', user: req.user, section: 'administrador'})
+});
+
 /*
  * ---------------------------------
  *  Deps
