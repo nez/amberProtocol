@@ -21,10 +21,10 @@ body > .container{
 }
 .footer {
   position: absolute;
-  bottom: 0;
+  /*bottom: 0;*/
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 412px;
+  /*height: 412px;*/
 }
 
 a {
@@ -34,7 +34,7 @@ a {
 .container-table {
   display: table;
   margin-top: 120px;
-  margin-bottom: 20px;
+  margin-bottom: 120px;
 }
 .vertical-center-row {
   display: table-cell;
@@ -113,4 +113,3 @@ h4:hover{
   color: #a6192e;
   font-weight: bold;
 }
-
