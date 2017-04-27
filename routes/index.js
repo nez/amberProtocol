@@ -901,7 +901,10 @@ router.post('/alert/update', isAuthenticated, function(req, res){
 /* XML ALERT */
 /* Admin */
 router.get('/xmlAlerta', isAuthenticated, function(req, res){
-    res.render('xmlBeta', {title: 'Amber', user: req.user, section: 'administrador'})
+    db_conf.db.manyOrNone('select * from dependencias').then(function(data){
+        res.render('xmlBeta', {title: 'Amber', user: req.user, section: 'xml', deps: data})
+    })
+
 });
 
 /*

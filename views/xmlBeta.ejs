@@ -38,7 +38,61 @@
             <img src="../images/xml.png" style="width:204px;height:228px;">
             <row style="text-align: center">
                 <div class="col-sm-12">
-                    <h4 data-toggle="modal" data-target="#genericModal" data-action="new_user">Generar</h4>
+                    <br>
+                    <form id="find">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Titulo de alerta</label>
+                                <p>
+                                    <input type="text" class="form-control" name="title" value="Alerta...">
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Fuente</label>
+                                <select class="form-control" name = "id_source">
+                                    <%if(deps.length > 0) {for (var i=0; i< deps.length; i ++){%>
+                                    <option value="<%= deps[i].id %>"><%=deps[i].nombre%></option>
+                                    <%}}%>
+
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Fecha inicial</label>
+                                <div class="form-group">
+                                    <div class='input-group'>
+                                        <input type="text" name="fecha_inicial" id="alerts_datepicker1" class="form-control" required>
+                                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Fecha final</label>
+                                <div class="form-group">
+                                    <div class='input-group'>
+                                        <input type="text" name="fecha_final" id="alerts_datepicker2" class="form-control" required>
+                                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <button type="submit" class="btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
+                        </p>
+                    </form>
+                    <br>
+                    <div id = "search_results">
+                    </div>
+
+                    <h4 id="xml" data-action="xml_gen">Generar</h4>
                 </div>
             </row>
         </div>
@@ -61,6 +115,7 @@
 <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="/bower_components/timepicker/jquery.timepicker.min.js"></script>
 <script src="/javascripts/modal.js"></script>
+<script src="/javascripts/xml.js"></script>
 
 </body>
 </html>
