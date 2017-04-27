@@ -898,14 +898,28 @@ router.post('/alert/update', isAuthenticated, function(req, res){
     })
 })
 
-/* XML ALERT */
-/* Admin */
+/* XML */
 router.get('/xmlAlerta', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from dependencias').then(function(data){
         res.render('xmlBeta', {title: 'Amber', user: req.user, section: 'xml', deps: data})
     })
-
 });
+
+/* XML Structure */
+router.post('/alert/xml', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.oneOrNone('select * from alertas where id = $1', [
+        req.body.id
+    ]).then(function(data){
+        res.render('partials/xml-results', {title: 'Amber', user: req.user, alerts: data})
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al buscar la alerta'
+        })
+    })
+})
 
 /*
  * ---------------------------------
