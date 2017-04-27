@@ -605,7 +605,7 @@ router.post('/resource/register', isAuthenticated, function(req, res){
     console.log(req.body),
         db_conf.db.one('insert into resources (id_alert, description, mimetype, rec_size, uri) ' +
             'values($1, $2, $3, $4, $5) returning id', [
-            req.body.id_alert,
+            req.body.id_alerta,
             req.body.description,
             req.body.mimeType,
             req.body.size,
