@@ -911,7 +911,8 @@ router.post('/alert/xml', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select dependencias.nombre as nombredep, alertas.id as idalerta, ' +
         ' usuarios.usuario as nombreusuario, alertas.sent, alertas.status as alertastatus, alertas.msgtype, ' +
         ' infos.headline as infohead, infos.responsetype, infos.event as infoevent, infos.urgency, infos.certainty, infos.effective, ' +
-        ' infos.description as infodesc, infos.id as infoid from alertas, resources, infos, area, dependencias, usuarios  where alertas.id = $1 and' +
+        ' infos.description as infodesc, infos.id as infoid, resources.id as resourceid, resources.description as resourcedesc, ' +
+        ' resources.mimetype, resources.rec_size, resources.uri from alertas, resources, infos, area, dependencias, usuarios  where alertas.id = $1 and' +
         ' resources.id_alert = alertas.id and infos.id_alert = alertas.id and area.id_alert = alertas.id and ' +
         'dependencias.id = alertas.source and alertas.id_usuario = usuarios.id', [
         req.body.id
