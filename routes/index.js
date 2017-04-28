@@ -908,16 +908,47 @@ router.get('/xmlAlerta', isAuthenticated, function(req, res){
 /* XML Structure */
 router.post('/alert/xml', isAuthenticated, function(req, res){
     console.log(req.body);
-    db_conf.db.manyOrNone('select dependencias.nombre as nombredep, alertas.id as idalerta, ' +
-        ' usuarios.usuario as nombreusuario, alertas.sent, alertas.status as alertastatus, alertas.msgtype, ' +
-        ' infos.headline as infohead, infos.responsetype, infos.event as infoevent, infos.urgency, infos.certainty, infos.effective, ' +
-        ' infos.description as infodesc, infos.id as infoid, resources.id as resourceid, resources.description as resourcedesc, ' +
-        ' resources.mimetype, resources.rec_size, resources.uri from alertas, resources, infos, area, dependencias, usuarios  where alertas.id = $1 and' +
-        ' resources.id_alert = alertas.id and infos.id_alert = alertas.id and area.id_alert = alertas.id and ' +
-        'dependencias.id = alertas.source and alertas.id_usuario = usuarios.id', [
-        req.body.id
-    ]).then(function(data){
-        res.render('partials/xml-results', {title: 'Amber', user: req.user, alerts: data})
+    db_conf.db.task(function(t){
+        return t.batch([
+            this.db.oneOrNone('select alertas.id, alertas.title, alertas.sent, alertas.status, alertas.msgtype, ' +
+                ' alertas.source, dependencias.nombre, usuarios.usuario from alertas, dependencias, usuarios where id = $1 and alertas.id_usuario = ' +
+                'usuarios.id and usuarios.id_dependencia = dependencias.id', [
+                req.body.id
+            ]),
+            this.db.manyOrNone('select * from infos where id_alerta = $1', [
+                req.body.id
+            ]),
+            this.db.manyOrNone('select * from resources where id_alerta = $1', [
+                req.body.id
+            ]),
+            this.db.manyOrNone('select * from area where id_alerta = $1', [
+                req.body.id
+            ]),
+            this.db.manyOrNone('select * from victims where id_alerta = $1', [
+                req.body.id
+            ]),
+            this.db.manyOrNone('select * from suspect where id_alerta = $1', [
+                req.body.id
+            ]),
+            this.db.manyOrNone('select * from companion where id_alerta = $1', [
+                req.body.id
+            ]),
+            this.db.manyOrNone('select * from event where id_alerta = $1', [
+                req.body.id
+            ])
+        ])
+    }).then(function(data){
+        res.render('partials/xml-results', {
+            title: 'Amber',
+            user: req.user,
+            alerts: data[0],
+            resources: data[1],
+            areas: data[2],
+            victims: data[3],
+            suspects: data[4],
+            companions: data[5],
+            event: data[6]
+        })
     }).catch(function(error){
         console.log(error);
         res.json({
