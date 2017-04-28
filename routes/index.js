@@ -911,8 +911,10 @@ router.post('/alert/xml', isAuthenticated, function(req, res){
     db_conf.db.task(function(t){
         return t.batch([
             this.db.oneOrNone('select alertas.id, alertas.title, alertas.sent, alertas.status, alertas.msgtype, ' +
-                ' alertas.source, dependencias.nombre, usuarios.usuario from alertas, dependencias, usuarios where id = $1 and alertas.id_usuario = ' +
-                'usuarios.id and usuarios.id_dependencia = dependencias.id', [
+                ' alertas.source, dependencias.nombre, usuarios.usuario ' +
+                ' from alertas, dependencias, usuarios ' +
+                ' where id = $1 and alertas.id_usuario = ' +
+                ' usuarios.id and alertas.source = dependencias.id', [
                 req.body.id
             ]),
             this.db.manyOrNone('select * from infos where id_alerta = $1', [
@@ -942,12 +944,13 @@ router.post('/alert/xml', isAuthenticated, function(req, res){
             title: 'Amber',
             user: req.user,
             alerts: data[0],
-            resources: data[1],
-            areas: data[2],
-            victims: data[3],
-            suspects: data[4],
-            companions: data[5],
-            event: data[6]
+            infos: data[1],
+            resources: data[2]
+            areas: data[3],
+            victims: data[4],
+            suspects: data[5],
+            companions: data[6],
+            event: data[7]
         })
     }).catch(function(error){
         console.log(error);
