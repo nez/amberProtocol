@@ -910,32 +910,32 @@ router.post('/alert/xml', isAuthenticated, function(req, res){
     console.log(req.body);
     db_conf.db.task(function(t){
         return t.batch([
-            this.db.oneOrNone('select alertas.id, alertas.title, alertas.sent, alertas.status, alertas.msgtype, ' +
+            this.oneOrNone('select alertas.id, alertas.title, alertas.sent, alertas.status, alertas.msgtype, ' +
                 ' alertas.source, dependencias.nombre, usuarios.usuario ' +
                 ' from alertas, dependencias, usuarios ' +
-                ' where id = $1 and alertas.id_usuario = ' +
+                ' where alertas.id = $1 and alertas.id_usuario = ' +
                 ' usuarios.id and alertas.source = dependencias.id', [
                 req.body.id
             ]),
-            this.db.manyOrNone('select * from infos where id_alerta = $1', [
+            this.manyOrNone('select * from infos where id_alert = $1', [
                 req.body.id
             ]),
-            this.db.manyOrNone('select * from resources where id_alerta = $1', [
+            this.manyOrNone('select * from resources where id_alert = $1', [
                 req.body.id
             ]),
-            this.db.manyOrNone('select * from area where id_alerta = $1', [
+            this.manyOrNone('select * from area where id_alert = $1', [
                 req.body.id
             ]),
-            this.db.manyOrNone('select * from victims where id_alerta = $1', [
+            this.manyOrNone('select * from victims where id_alert = $1', [
                 req.body.id
             ]),
-            this.db.manyOrNone('select * from suspect where id_alerta = $1', [
+            this.manyOrNone('select * from suspect where id_alert = $1', [
                 req.body.id
             ]),
-            this.db.manyOrNone('select * from companion where id_alerta = $1', [
+            this.manyOrNone('select * from companion where id_alert = $1', [
                 req.body.id
             ]),
-            this.db.manyOrNone('select * from event where id_alerta = $1', [
+            this.manyOrNone('select * from event where id_alert = $1', [
                 req.body.id
             ])
         ])
@@ -945,7 +945,7 @@ router.post('/alert/xml', isAuthenticated, function(req, res){
             user: req.user,
             alerts: data[0],
             infos: data[1],
-            resources: data[2]
+            resources: data[2],
             areas: data[3],
             victims: data[4],
             suspects: data[5],
