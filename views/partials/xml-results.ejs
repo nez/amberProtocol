@@ -1,1 +1,12 @@
-<p><%='<alerta>' + alerts.title +'</alerta>'%></p>
+<%if(alerts.length > 0){%>
+<p><%='<alerta xmlns = "urn:oasis:names:tc:emergency:cap:1.2>' + '<identifier>' + alerts[0].idalerta + '</identifier>' +
+    '<sender>' + alerts[0].nombreusuario + '</sender>' + '<sent>' + alerts[0].sent + '</sent>' + '<status>' + alerts[0].alertastatus + '</status>' +
+    '<msgType>' + alerts[0].msgtype + '</msgType>' + '<source>' + alerts[0].nombredep + '</source>'%></p>
+<%for(var i = 0; i < alerts.length; i++){%>
+<p><%='<info>' +  '<id>' + alerts[i].infoid + '</id>' +  '<headline>' + alerts[i].infohead + '</headline>' +
+    '<responseType>' + alerts[i].responestype + '</responseType>' +  '<event>' + alerts[i].infoevent + '</event>' +
+    '<urgency>' + alerts[i].urgency + '</urgency>' +  '<certainty>' + alerts[i].certainty + '</certainty>' +
+    '<effective>' + alerts[i].effective + '</effective>' +  '<description>' + alerts[i].infodesc + '</description>' +'</info>'%></p>
+<%}%>
+<p><%='</alerta>'%></p>
+<%}%>

@@ -908,7 +908,12 @@ router.get('/xmlAlerta', isAuthenticated, function(req, res){
 /* XML Structure */
 router.post('/alert/xml', isAuthenticated, function(req, res){
     console.log(req.body);
-    db_conf.db.oneOrNone('select * from alertas where id = $1', [
+    db_conf.db.manyOrNone('select dependencias.nombre as nombredep, alertas.id as idalerta, ' +
+        ' usuarios.usuario as nombreusuario, alertas.sent, alertas.status as alertastatus, alertas.msgtype, ' +
+        ' infos.headline as infohead, infos.responsetype, infos.event as infoevent, infos.urgency, infos.certainty, infos.effective, ' +
+        ' infos.description as infodesc, infos.id as infoid from alertas, resources, infos, area, dependencias, usuarios  where alertas.id = $1 and' +
+        ' resources.id_alert = alertas.id and infos.id_alert = alertas.id and area.id_alert = alertas.id and ' +
+        'dependencias.id = alertas.source and alertas.id_usuario = usuarios.id', [
         req.body.id
     ]).then(function(data){
         res.render('partials/xml-results', {title: 'Amber', user: req.user, alerts: data})

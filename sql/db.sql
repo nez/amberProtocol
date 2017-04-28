@@ -64,8 +64,7 @@ create table alertas(
     sent timestamp,
     status text,
     msgType text,
-    source text,
-    description text
+    source integer references dependencias(id)
 );
 
 /* Alert Info :: Boletin */
