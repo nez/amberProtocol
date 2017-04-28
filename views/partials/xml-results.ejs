@@ -68,4 +68,58 @@
 <p><%='</victims>'%></p>
 <%}%>
 
+<!-- Suspects  -->
+<%if(suspects.length >  0){%>
+<p><%='<suspects>'%></p>
+<%for(var i = 0; i < suspects.length; i++){%>
+<p><%='<id>' + suspects[i].id + '</id>' +
+    '<name>' + suspects[i].name + '</name>' +
+    '<surname1>'  + suspects[i].surname1 + '</surname1>' +
+    '<surname2>'  + suspects[i].surname2 + '</surname2>' +
+    '<birthdate>' + suspects[i].birthdate + '</birthdate>' +
+    '<age>' + suspects[i].age + '</age>' +
+    '<gender>' + suspects[i].gender + '</gender>' +
+    '<nationality>' + suspects[i].nationality + '</nationality>' +
+    '<hairtype>' + suspects[i].hairtype + '</hairtype>' +
+    '<haircolor>' + suspects[i].haircolor + '</haircolor>' +
+    '<eyecolor>' + suspects[i].eyecolor + '</eyecolor>' +
+    '<height>' + suspects[i].height + '</height>' +
+    '<weight>' + suspects[i].weight + '</weight>' +
+    '<complex>' + suspects[i].complex + '</complex>' +
+    '<wear>' + suspects[i].wear + '</wear>' +
+    '<vehicle>' + suspects[i].vehicle + '</vehicle>' +
+    '<kinship>' + suspects[i].kinship + '</kinship>' +
+    '<alias>' + suspects[i].wear + '</alias>' +
+    '<peculiar>' + suspects[i].peculiar + '</peculiar>'%></p>
+<%}%>
+<p><%='</suspects>'%></p>
+<%}%>
+
+<!-- Companion -->
+<%if(companions.length >  0){%>
+<p><%='<companions>'%></p>
+<%for(var i = 0; i < companions.length; i++){%>
+<p><%='<id>' + companions[i].id + '</id>' +
+    '<name>' + companions[i].name + '</name>' +
+    '<surname1>'  + companions[i].surname1 + '</surname1>' +
+    '<surname2>'  + companions[i].surname2 + '</surname2>' +
+    '<birthdate>' + companions[i].birthdate + '</birthdate>' +
+    '<age>' + companions[i].age + '</age>' +
+    '<gender>' + companions[i].gender + '</gender>' +
+    '<nationality>' + companions[i].nationality + '</nationality>' +
+    '<hairtype>' + companions[i].hairtype + '</hairtype>' +
+    '<haircolor>' + companions[i].haircolor + '</haircolor>' +
+    '<eyecolor>' + companions[i].eyecolor + '</eyecolor>' +
+    '<height>' + companions[i].height + '</height>' +
+    '<weight>' + companions[i].weight + '</weight>' +
+    '<complex>' + companions[i].complex + '</complex>' +
+    '<wear>' + companions[i].wear + '</wear>' +
+    '<vehicle>' + companions[i].vehicle + '</vehicle>' +
+    '<kinship>' + companions[i].kinship + '</kinship>' +
+    '<alias>' + companions[i].wear + '</alias>' +
+    '<peculiar>' + companions[i].peculiar + '</peculiar>'%></p>
+<%}%>
+<p><%='</companions>'%></p>
+<%}%>
+
 <p><%='</alerta>'%></p>
