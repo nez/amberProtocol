@@ -44,4 +44,28 @@
 <p><%='</area>'%></p>
 <%}%>
 
+<!-- Victims  -->
+<%if(victims.length >  0){%>
+<p><%='<victims>'%></p>
+<%for(var i = 0; i < victims.length; i++){%>
+<p><%='<id>' + victims[i].id + '</id>' +
+    '<name>' + victims[i].name + '</name>' +
+    '<surname1>'  + victims[i].surname1 + '</surname1>' +
+    '<surname2>'  + victims[i].surname2 + '</surname2>' +
+    '<birthdate>' + victims[i].birthdate + '</birthdate>' +
+    '<age>' + victims[i].age + '</age>' +
+    '<gender>' + victims[i].gender + '</gender>' +
+    '<nationality>' + victims[i].nationality + '</nationality>' +
+    '<hairtype>' + victims[i].hairtype + '</hairtype>' +
+    '<haircolor>' + victims[i].haircolor + '</haircolor>' +
+    '<eyecolor>' + victims[i].eyecolor + '</eyecolor>' +
+    '<height>' + victims[i].height + '</height>' +
+    '<weight>' + victims[i].weight + '</weight>' +
+    '<complex>' + victims[i].complex + '</complex>' +
+    '<wear>' + victims[i].wear + '</wear>' +
+    '<peculiar>' + victims[i].peculiar + '</peculiar>'%></p>
+    <%}%>
+<p><%='</victims>'%></p>
+<%}%>
+
 <p><%='</alerta>'%></p>

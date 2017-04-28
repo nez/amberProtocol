@@ -940,6 +940,7 @@ router.post('/alert/xml', isAuthenticated, function(req, res){
             ])
         ])
     }).then(function(data){
+        console.log(data[4]);
         res.render('partials/xml-results', {
             title: 'Amber',
             user: req.user,
