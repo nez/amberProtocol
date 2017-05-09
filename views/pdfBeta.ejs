@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title><%= title%></title>
+    <!-- Polymer -->
+    <script type="text/javascript" src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="/bower_components/dgm-footer/dgm-footer.html">
+    <!-- Bootstrap -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+<% include partials/navbar.ejs%>
+
+<div class="container" style=" padding-top:5%;">
+    <div class="row">
+        <div class="col-sm-12" style="text-align: center">
+            <!--<div class="panel panel-default">
+                <div class="panel-heading">Administrar  usuarios</div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <button type="button" data-toggle="modal" data-target="#genericModal" data-action="new_user" class="list-group-item"><i class="fa fa-user-plus"></i> <strong>Crear usuario </strong></button>
+                        <button type="button" data-action="edit_user" data-toggle="modal" data-target="#genericModal"  class="list-group-item"><i class="fa fa-users"></i> <strong>Editar o eliminar usuarios</strong></button>
+                    </div>
+                </div>
+            </div>-->
+            <div class="col-sm-12" style="text-align: center">
+            </div>
+            <img src="../images/pdf.png" style="width:204px;height:228px;">
+            <row style="text-align: center">
+                <div class="col-sm-12">
+                    <br>
+                    <form id="find">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Titulo de alerta</label>
+                                <p>
+                                    <input type="text" class="form-control" name="title" value="Alerta...">
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Fuente</label>
+                                <select class="form-control" name = "id_source">
+                                    <%if(deps.length > 0) {for (var i=0; i< deps.length; i ++){%>
+                                    <option value="<%= deps[i].id %>"><%=deps[i].nombre%></option>
+                                    <%}}%>
+
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Fecha inicial</label>
+                                <div class="form-group">
+                                    <div class='input-group'>
+                                        <input type="text" name="fecha_inicial" id="alerts_datepicker1" class="form-control" required>
+                                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Fecha final</label>
+                                <div class="form-group">
+                                    <div class='input-group'>
+                                        <input type="text" name="fecha_final" id="alerts_datepicker2" class="form-control" required>
+                                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <button type="submit" class="btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
+                        </p>
+                    </form>
+                    <br>
+                    <div id = "search_results">
+                    </div>
+
+                    <!--<h4 id="xml" data-action="xml_gen">Generar</h4>-->
+                </div>
+            </row>
+        </div>
+    </div>
+</div>
+
+<% include partials/modal.ejs %>
+
+<dgm-footer class="footer"></dgm-footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="/bower_components/jspdf/dist/jspdf.min.js"></script>
+
+<!-- datepicker -->
+<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/bower_components/timepicker/jquery.timepicker.min.js"></script>
+<script src="/javascripts/modal.js"></script>
+<script src="/javascripts/xml.js"></script>
+
+</body>
+</html>

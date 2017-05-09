@@ -898,6 +898,13 @@ router.post('/alert/update', isAuthenticated, function(req, res){
     })
 })
 
+/* PDF */
+router.get('/pdfAlerta', isAuthenticated, function(req, res){
+    db_conf.db.manyOrNone('select * from dependencias').then(function(data){
+        res.render('pdfBeta', {title: 'Amber', user: req.user, section: 'xml', deps: data})
+    })
+});
+
 /* XML */
 router.get('/xmlAlerta', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from dependencias').then(function(data){
