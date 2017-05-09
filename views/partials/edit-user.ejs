@@ -1,0 +1,203 @@
+<form>
+    <p>
+        <label>Nombre de usuario</label>
+        <input type="text" class="form-control" name="usuario" required value="<%= user.usuario%>">
+    </p>
+    <div class="row">
+        <div class="col-sm-6">
+            <p>
+                <label>Contraseña</label>
+                <input type="password" class="form-control" name="contrasena" required value="<%= user.contrasena%>">
+            </p>
+        </div>
+
+        <div class="col-sm-6">
+            <p>
+                <label>Confirmar contraseña</label>
+                <input type="password" class="form-control" name="confirmar_contrasena" required value="<%= user.contrasena%>">
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            <p>
+                <label>E-mail</label>
+                <input type="email" class="form-control" name="email" value="<%= user.email%>">
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <p>
+                <label>Nombre(s)</label>
+                <input type="text" class="form-control" name="nombres" required value="<%= user.nombres%>">
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p>
+                <label>Apellido paterno</label>
+                <input type="text" class="form-control" name="apellido_paterno" required value="<%= user.apellido_paterno%>">
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <p>
+                <label>Apellido materno</label>
+                <input type="text" class="form-control" name="apellido_materno" required value="<%= user.apellido_materno%>">
+            </p>
+        </div>
+    </div>
+
+
+    <p>
+        <label>RFC</label>
+        <input type="text" class="form-control" name="rfc" value="<%= user.rfc%>">
+    </p>
+
+
+    <p>
+        <label>Calle</label>
+        <input type="text" class="form-control" name="direccion_calle" value="<%= user.direccion_calle%>">
+    </p>
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            <p>
+                <label>Número interior</label>
+                <input type="text" class="form-control" name="direccion_numero_int"  value="<%= user.direccion_numero_int%>">
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <p>
+                <label>Número exterior</label>
+                <input type="text" class="form-control" name="direccion_numero_ext"  value="<%= user.direccion_numero_ext%>">
+            </p>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            <p>
+                <label>Colonia</label>
+                <input type="text" class="form-control" name="direccion_colonia"  value="<%= user.direccion_colonia%>">
+            </p>
+        </div>
+
+        <div class="col-sm-6">
+            <p>
+                <label>Localidad</label>
+                <input type="text" class="form-control" name="direccion_localidad"  value="<%= user.direccion_localidad%>">
+            </p>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p>
+                <label>Municipio</label>
+                <input type="text" class="form-control" name="direccion_municipio"  value="<%= user.direccion_municipio%>">
+            </p>
+        </div>
+
+        <div class="col-sm-6">
+            <p>
+                <label>Ciudad</label>
+                <input type="text" class="form-control" name="direccion_ciudad"  value="<%= user.direccion_ciudad%>">
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p>
+                <label>Estado</label>
+                <input type="text" class="form-control" name="direccion_estado"  value="<%= user.direccion_estado%>">
+            </p>
+        </div>
+
+        <div class="col-sm-6">
+            <p>
+                <label>País</label>
+                <input type="text" class="form-control" name="direccion_pais" value="México"  value="<%= user.direccion_pais%>">
+            </p>
+        </div>
+    </div>
+
+
+    <p>
+        <label>Fuente</label>
+        <select name = "source" class="form-control" required>
+            <%
+            if (deps.length > 0 ){
+            for (var i =0; i < deps.length; i++){
+            %>
+            <option value="<%= deps[i].id %>" <%= user.source == deps[i].id?'selected' : null %> > <%= deps[i].nombre %> </option>
+            <%
+            }
+            }else {
+            %>
+            <option value="">Ninguna</option>
+            <% }%>
+        </select>
+    </p>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <p>
+                <label>Permiso alertas</label>
+                <select class="form-control" name="permiso_alertas">
+                    <%if(user.permiso_alerta){%>
+                    <option value="false">No</option>
+                    <option value="true" selected>Sí</option>
+                    <%}else{%>
+                    <option value="false" selected>No</option>
+                    <option value="true">Sí</option>
+                    <%}%>
+                </select>
+            </p>
+        </div>
+
+
+        <div class="col-sm-4">
+            <p>
+                <label>Permiso administrador</label>
+                <select class="form-control" name="permiso_administrador">
+                    <%if(user.permiso_administrador){%>
+                    <option value="false">No</option>
+                    <option value="true" selected>Sí</option>
+                    <%}else{%>
+                    <option value="false" selected>No</option>
+                    <option value="true">Sí</option>
+                    <%}%>
+                </select>
+            </p>
+        </div>
+
+        <div class="col-sm-4">
+            <p>
+                <label>Tablero</label>
+                <select class="form-control" name="permiso_tablero">
+                    <%if(user.permiso_tablero){%>
+                    <option value="false">No</option>
+                    <option value="true" selected>Sí</option>
+                    <%}else{%>
+                    <option value="false" selected>No</option>
+                    <option value="true">Sí</option>
+                    <%}%>
+                </select>
+            </p>
+        </div>
+    </div>
+    </div>
+
+    <p>
+        <button class="btn btn-primary" type="submit">Registrar</button>
+    </p>
+
+</form>

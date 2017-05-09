@@ -1080,6 +1080,27 @@ router.post('/dep/update', isAuthenticated, function(req, res){
  * ---------------------------------
  */
 
+/* Edit User */
+router.post('/user/edit', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.task(function(t){
+        return this.batch([
+            t.manyOrNone('select * from dependencias'),
+            t.oneOrNone('select * from usuarios where id = $1', [
+                req.body.id
+            ])
+        ])
+    }).then(function(data){
+        res.render('partials/edit-user', {title: 'Amber', user: data[1], deps: data[0]})
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un erro al buscar al usuario'
+        })
+    })
+})
+
 /* Find User */
 router.post('/user/find-users-view', isAuthenticated, function(req, res){
     db_conf.db.manyOrNone('select * from dependencias').then(function(data){

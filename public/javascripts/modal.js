@@ -208,7 +208,11 @@ function modalEvents(button, modal, page ) {
             modal.find('#modal_content').load('/user/find-users-view', {}, function(){
                 modal.find('#find').submit(function(e){
                    modal.find('#search_results').load('/user/results', $(this).serializeArray(), function(){
-
+                       $('#search_results').find('.list-group-item').click(function(){
+                           modal.find('#modal_content').load('/user/edit', {id: $(this).data('users_id')}, function(){
+                               
+                           })
+                       })
                    })
                     e.preventDefault();
                 });
