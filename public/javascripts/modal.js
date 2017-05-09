@@ -201,6 +201,20 @@ function modalEvents(button, modal, page ) {
             });
             break;
 
+        // Usuarios
+        case "edit_user":
+            modal.find('.modal-title').text('Buscar usuario');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/user/find-users-view', {}, function(){
+                modal.find('#find').submit(function(e){
+                   modal.find('#search_results').load('/user/results', $(this).serializeArray(), function(){
+
+                   })
+                    e.preventDefault();
+                });
+            });
+            break;
+
         // Alerts
         case "edit_alert":
             modal.find('.modal-title').text('Buscar alerta');

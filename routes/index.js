@@ -1080,6 +1080,36 @@ router.post('/dep/update', isAuthenticated, function(req, res){
  * ---------------------------------
  */
 
+/* Find User */
+router.post('/user/find-users-view', isAuthenticated, function(req, res){
+    db_conf.db.manyOrNone('select * from dependencias').then(function(data){
+        res.render('partials/find-users-view', {title: 'Amber', user: req.user, deps: data})
+    }).catch(function(error){
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al cargar la vista'
+        })
+    })
+
+});
+
+/* User results */
+router.post('/user/results', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.manyOrNone("select * from usuarios where id_dependencia = $1 and nombres ilike '%$2#%'",[
+        req.body.id_dep
+        req.body.nombre
+    ]).then(function(data){
+        res.render('partials/users-results-view', {title: 'Amber', user: req.user, users: data})
+    }).catch(function(error){
+        consol.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al realizar la búsqueda'
+        })
+    })
+})
+
 /* New User */
 router.post('/user/new', isAuthenticated, function (req, res) {
     db_conf.db.manyOrNone('select * from dependencias').then(function(data){

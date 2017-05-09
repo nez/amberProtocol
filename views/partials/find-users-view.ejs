@@ -1,0 +1,27 @@
+<form id="find">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <label>Nombres usuario</label>
+            <p>
+                <input type="text" class="form-control" name="nombre" value="Nombre...">
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <label>Dependencia</label>
+            <select class="form-control" name = "id_dep">
+                <%if(deps.length > 0) {for (var i=0; i< deps.length; i ++){%>
+                <option value="<%= deps[i].id %>"><%=deps[i].nombre%></option>
+                <%}}%>
+
+            </select>
+        </div>
+
+    </div>
+    <p>
+        <button type="submit" class="btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
+    </p>
+</form>
+<br>
+<div id = "search_results">
+</div>

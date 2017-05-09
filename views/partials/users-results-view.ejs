@@ -1,0 +1,16 @@
+<%
+if (users.length > 0){%>
+<label>Resultados</label>
+<div class="list-group">
+    <% for ( var i =0; i < users.length ; i++ ){ %>
+    <a href="#" class="list-group-item"  data-users_id="<%= users[i].id %>">
+        <h4 class="list-group-item-heading"><strong>ID: <span style="color:#a6192e"><%=users[i].id%></span></strong></h4>
+        <h4> <%= users[i].title %> </h4>
+        <p class="list-group-item-text"> <strong>Enviada:</strong> <%= users[i].sent %></p>
+    </a>
+    <%}%>
+</div>
+
+<%}else {%>
+<div class="alert alert-info" role="alert">No hay alertas registradas</div>
+<%}%>
