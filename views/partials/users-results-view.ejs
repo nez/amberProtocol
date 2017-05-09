@@ -6,7 +6,7 @@ if (users.length > 0){%>
     <a href="#" class="list-group-item"  data-users_id="<%= users[i].id %>">
         <h4 class="list-group-item-heading"><strong>ID: <span style="color:#a6192e"><%=users[i].id%></span></strong></h4>
         <h4> <%= users[i].title %> </h4>
-        <p class="list-group-item-text"> <strong>Enviada:</strong> <%= users[i].sent %></p>
+        <p class="list-group-item-text"> <strong>Nombre:</strong> <%= users[i].nombres %> | <strong>Apellido paterno:</strong> <%= users[i].apellido_paterno %> | <strong>Apellido materno:</strong> <%= users[i].apellido_materno %> </p>
     </a>
     <%}%>
 </div>

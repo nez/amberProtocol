@@ -1097,7 +1097,7 @@ router.post('/user/find-users-view', isAuthenticated, function(req, res){
 router.post('/user/results', isAuthenticated, function(req, res){
     console.log(req.body);
     db_conf.db.manyOrNone("select * from usuarios where id_dependencia = $1 and nombres ilike '%$2#%'",[
-        req.body.id_dep
+        req.body.id_dep,
         req.body.nombre
     ]).then(function(data){
         res.render('partials/users-results-view', {title: 'Amber', user: req.user, users: data})
