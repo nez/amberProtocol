@@ -210,10 +210,18 @@ function modalEvents(button, modal, page ) {
                    modal.find('#search_results').load('/user/results', $(this).serializeArray(), function(){
                        $('#search_results').find('.list-group-item').click(function(){
                            modal.find('#modal_content').load('/user/edit', {id: $(this).data('users_id')}, function(){
-                               
-                           })
-                       })
-                   })
+                               modal.find('form').submit(function(e){
+                                   $.post('/user/update', $(this).serializeArray()).done(function(data){
+                                       alert(data.message);
+                                       if(data.status == 'Ok'){
+                                           modal.modal('hide');
+                                       }
+                                   });
+                                   e.preventDefault();
+                               });
+                           });
+                       });
+                   });
                     e.preventDefault();
                 });
             });

@@ -159,15 +159,15 @@ router.post('/ind/options', isAuthenticated, function(req, res){
 
 /* Event new */
 router.post('/event/new', isAuthenticated, function(req, res){
-   db_conf.db.manyOrNone('select * from alertas').then(function(data){
-       res.render('partials/new-event', {title: 'Amber', user: req.user, alertas: data})
-   }).catch(function(error){
-       console.log(error);
-       res.json({
-           status: 'Error',
-           message: 'Ocurrió un error al cargar la vista'
-       })
-   })
+    db_conf.db.manyOrNone('select * from alertas').then(function(data){
+        res.render('partials/new-event', {title: 'Amber', user: req.user, alertas: data})
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al cargar la vista'
+        })
+    })
 });
 
 /* Event register */
@@ -178,7 +178,7 @@ router.post('/event/register', isAuthenticated, function(req, res){
         'settlementname, postalcode, municipalityname, municipalitycode, statename, statecode, perpendiculars, parallel,' +
         'landmarks, localityname, localitycode) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, ' +
         '$21, $22, $23, $24, $25) returning id',[
-            req.body.id_alerta,
+        req.body.id_alerta,
         req.body.edate,
         req.body.victimnumber,
         req.body.companionnumber,
@@ -261,19 +261,19 @@ router.post('/event/update', isAuthenticated, function(req, res){
         'roadname = $11, exteriornumber = $12, interiornumber = $13, settlementtype = $14,' +
         ' postalcode = $15, localityname = $16, localitycode = $17, municipalityname = $18, municipalitycode = $19, ' +
         'statename = $20, statecode = $21, perpendiculars = $22, parallel = $23, landmarks = $24 where id = $25 returning id', [
-            req.body.id_alert,
-            new Date(req.body.edate),
-       numericCol(req.body.victimnumber),
-       numericCol(req.body.companionnumber),
-       numericCol(req.body.suspectnumber),
+        req.body.id_alert,
+        new Date(req.body.edate),
+        numericCol(req.body.victimnumber),
+        numericCol(req.body.companionnumber),
+        numericCol(req.body.suspectnumber),
         req.body.eventdesc,
         new Date(req.body.expiration),
         numericCol(req.body.latitude),
         numericCol(req.body.longitude),
         req.body.roadtype,
         req.body.roadname,
-       numericCol(req.body.exteriornumber),
-       numericCol(req.body.interiornumber),
+        numericCol(req.body.exteriornumber),
+        numericCol(req.body.interiornumber),
         req.body.settlementtype,
         req.body.postalcode,
         req.body.localityname,
@@ -371,15 +371,15 @@ router.post('/ind/register', isAuthenticated, function(req, res){
 
 /* Find ind */
 router.post('/ind/find-ind-view', isAuthenticated, function(req, res){
-   db_conf.db.manyOrNone('select * from alertas').then(function(data){
-       res.render('partials/find-inds-view', {title: 'Amber', user: req.user, alertas: data});
-   }).catch(function(error){
-       console.log(error);
-       res.json({
-           status: 'Error',
-           message: 'Ocurrió un error al levantar la vista'
-       })
-   })
+    db_conf.db.manyOrNone('select * from alertas').then(function(data){
+        res.render('partials/find-inds-view', {title: 'Amber', user: req.user, alertas: data});
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al levantar la vista'
+        })
+    })
 });
 
 /* Results ind */
@@ -1079,6 +1079,49 @@ router.post('/dep/update', isAuthenticated, function(req, res){
  *  Users
  * ---------------------------------
  */
+
+/* User Update */
+router.post('/user/update', isAuthenticated, function(req, res){
+    console.log(req.body);
+    db_conf.db.oneOrNone('update usuarios set usuario=$1, contrasena=$2, email=$3, nombres=$4, apellido_paterno=$5, ' +
+        'apellido_materno=$6, rfc=$7, direccion_calle=$8, direccion_numero_int=$9, direccion_numero_ext=$10, ' +
+        'direccion_colonia=$11, direccion_localidad=$12, direccion_municipio=$13, direccion_ciudad=$14, ' +
+        'direccion_estado=$15, direccion_pais=$16, permiso_alerta=$17, permiso_administrador=$18, permiso_tablero=$19, ' +
+        'id_dependencia=$20 where id = $21 returning id, nombres', [
+        req.body.usuario,
+        req.body.contrasena,
+        req.body.email,
+        req.body.nombres,
+        req.body.apellido_paterno,
+        req.body.apellido_materno,
+        req.body.rfc,
+        req.body.direccion_calle,
+        req.body.direccion_numero_int,
+        req.body.direccion_numero_ext,
+        req.body.direccion_colonia,
+        req.body.direccion_localidad,
+        req.body.direccion_municipio,
+        req.body.direccion_ciudad,
+        req.body.direccion_estado,
+        req.body.direccion_pais,
+        req.body.permiso_alertas,
+        req.body.permiso_administrador,
+        req.body.permiso_tablero,
+        req.body.source,
+        req.body.id
+    ]).then(function(data){
+      res.json({
+          status: 'Ok',
+          message: 'El usuario: ' + data.nombres + ' ha sido actualizado'
+      })
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al actualizar al usuario'
+        })
+    })
+})
 
 /* Edit User */
 router.post('/user/edit', isAuthenticated, function(req, res){
