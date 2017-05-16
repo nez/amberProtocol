@@ -834,15 +834,40 @@ router.post('/alert/register', isAuthenticated, function(req, res){
 
 /* Look up alert view */
 router.post('/alert/find-alerts-view', isAuthenticated, function(req, res){
-    db_conf.db.manyOrNone('select * from dependencias').then(function(data){
-        res.render('partials/find-alerts-view', {title: 'Amber', user: req.user, deps: data})
+    var page     = req.body.page;
+    var pageSize = 10;
+    var offset   = page * pageSize;
+    console.log(req.body.page);
+    db_conf.db.task(function(t){
+        return t.batch([
+            this.manyOrNone('select distinct dependencias.id, dependencias.nombre from dependencias, usuarios where usuarios.id_dependencia = ' +
+                'dependencias.id or usuarios.permiso_administrador = TRUE and usuarios.id = $1', [req.user.id]),
+            this.manyOrNone('select count(*) from alertas as count'),
+            this.manyOrNone('select * from alertas order by sent limit $1 offset $2', [pageSize, offset])
+        ])
+    }).then(function(data){
+        console.log(data[2]);
+        res.render('partials/find-alerts-view', {
+            title: 'Amber',
+            user: req.user,
+            deps: data[0],
+            alertas: data[2],
+            pageNumber: page,
+            numberOfPages: parseInt((+data[1].count + pageSize - 1) / pageSize)
+        })
+    }).catch(function(error){
+        console.log(error);
+        res.json({
+            status: 'Error',
+            message: 'Ocurrió un error al cargar los datos'
+        })
     })
 });
 
 /* Look up results */
 router.post('/alerts/results', isAuthenticated, function(req, res){
     console.log(req.body);
-    db_conf.db.manyOrNone("select * from alertas where status = 'activa' and (title ilike '%$1#%' or (sent <= $2 and sent >= $3) or source = $4) ", [
+    db_conf.db.manyOrNone("select * from alertas where status = 'activa' and (title ilike '%$1#%' and (sent <= $2 and sent >= $3) and source = $4) ", [
         req.body.title,
         req.body.fecha_final,
         req.body.fecha_inicial,
