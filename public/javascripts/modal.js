@@ -288,6 +288,26 @@ function modalEvents(button, modal, page ) {
                     format: 'YYYY-MM-DD',
                     defaultDate: new Date().setDate(new Date().getDate())
                 });
+                // If direct click
+                $('#search_results').find('.list-group-item').click(function(){
+                    // Infos
+                    $('#search_results').load('/info/results', {id: $(this).data('alertas_id')}, function(){
+                        $('#search_results').find('.list-group-item').click(function(){
+                            modal.find('#modal_content').load('/info/edit', {id: $(this).data('infos_id')}, function(){
+                                modal.find('form').submit(function(e){
+                                    $.post('/info/update', $(this).serializeArray()).done(function(data){
+                                        alert(data.message);
+                                        if(data.status == 'Ok'){
+                                            modal.modal('hide');
+                                        }
+                                    });
+                                    e.preventDefault();
+                                });
+                            });
+                        })
+                    })
+                });
+                // If Lookup
                 modal.find('#find').submit(function(e){
                     modal.find('#search_results').load('/alerts/results', $(this).serializeArray(), function(){
                         $('#search_results').find('.list-group-item').click(function(){
