@@ -1,23 +1,17 @@
 var options = {};
-
 pgp = require('pg-promise')(options);
 
-var db;
+const config = {
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || '5432',
+    database: process.env.DB_NAME  || 'amber',
+    user: process.env.DB_USER || 'auser',
+    password: process.env.DB_PASSWORD || 'test'
+};
 
-if (typeof process.env.DB != "undefined"){
-    console.log("DB: ", process.env.DB);
-    db = pgp(process.env.DB);
-}else{
-    console.log("Warning: BM_DB env variable si not set \n" +
-    " defaulting to -> postgres://auser:test@localhost/amber");
-    db = pgp({
-        host: 'localhost',
-        //port: '3000',
-        database: 'amber',
-        user: 'auser',
-        password: 'test'
-    });
-}
+console.log('DB Config -> ', JSON.stringify(config));
+
+var db = pgp(config);
 
 module.exports = {
     db: db
