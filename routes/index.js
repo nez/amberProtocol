@@ -840,10 +840,13 @@ router.post('/alert/find-alerts-view', isAuthenticated, function(req, res){
     console.log(req.body.page);
     db_conf.db.task(function(t){
         return t.batch([
-            this.manyOrNone('select distinct dependencias.id, dependencias.nombre from dependencias, usuarios where usuarios.id_dependencia = ' +
-                'dependencias.id or usuarios.permiso_administrador = TRUE and usuarios.id = $1', [req.user.id]),
+            this.manyOrNone('select distinct dependencias.id, dependencias.nombre from dependencias, usuarios where (usuarios.id_dependencia = ' +
+                'dependencias.id or usuarios.permiso_administrador = TRUE) and usuarios.id = $1', [req.user.id]),
             this.manyOrNone('select count(*) from alertas as count'),
-            this.manyOrNone('select * from alertas order by sent limit $1 offset $2', [pageSize, offset])
+            this.manyOrNone('select alertas.id, alertas.title, alertas.id_usuario, alertas.sent, alertas.status, ' +
+                'alertas.msgtype, alertas.source from alertas, usuarios where (alertas.source = usuarios.id_dependencia  ' +
+                ' and usuarios.id = $3) or (usuarios.permiso_administrador = TRUE and usuarios.id = $3)  ' +
+                ' order by sent limit $1 offset $2', [pageSize, offset, req.user.id])
         ])
     }).then(function(data){
         console.log(data[2]);
