@@ -13,6 +13,13 @@ $('#alerts_datepicker2').datetimepicker({
     format: 'YYYY-MM-DD',
     defaultDate: new Date().setDate(new Date().getDate())
 });
+
+$('#search_results').find('.list-group-item').click(function(){
+    $(document).find('#search_results').load('/alert/xml', {id: $(this).data('alertas_id')}, function(){
+
+    });
+});
+
 $(document).find('#find').submit(function(e){
     $(document).find('#search_results').load('/alerts/results', $(this).serializeArray(), function(){
         $('#search_results').find('.list-group-item').click(function(){
