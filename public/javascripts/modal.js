@@ -304,7 +304,7 @@ function modalEvents(button, modal, page ) {
         case "edit_resource":
             modal.find('.modal-title').text('Buscar alerta');
             modal.find('#modal_content').html("");
-            modal.find('#modal_content').load('/alert/find-alerts-view', {}, function(){
+            modal.find('#modal_content').load('/alert/find-alerts-view', {page: page}, function(){
                 $('#alerts_datepicker1').datetimepicker({
                     format: 'YYYY-MM-DD',
                     defaultDate: new Date().setDate(new Date().getDate() - 1)
@@ -343,7 +343,7 @@ function modalEvents(button, modal, page ) {
         case "edit_area":
             modal.find('.modal-title').text('Buscar alerta');
             modal.find('#modal_content').html("");
-            modal.find('#modal_content').load('/alert/find-alerts-view', {}, function () {
+            modal.find('#modal_content').load('/alert/find-alerts-view', {page: page}, function () {
                 $('#alerts_datepicker1').datetimepicker({
                     format: 'YYYY-MM-DD',
                     defaultDate: new Date().setDate(new Date().getDate() - 1)
@@ -405,7 +405,7 @@ function modalEvents(button, modal, page ) {
         case "edit_event":
             modal.find('.modal-title').text('Buscar alerta');
             modal.find('#modal_content').html("");
-            modal.find('#modal_content').load('/alert/find-alerts-view', {}, function () {
+            modal.find('#modal_content').load('/alert/find-alerts-view', {page: page}, function () {
                 $('#alerts_datepicker1').datetimepicker({
                     format: 'YYYY-MM-DD',
                     defaultDate: new Date().setDate(new Date().getDate() - 1)
