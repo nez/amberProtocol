@@ -849,6 +849,7 @@ router.post('/alert/find-alerts-view', isAuthenticated, function(req, res){
                 ' order by sent limit $1 offset $2', [pageSize, offset, req.user.id])
         ])
     }).then(function(data){
+        console.log('RESULT');
         console.log(data[2]);
         res.render('partials/find-alerts-view', {
             title: 'Amber',
