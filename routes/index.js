@@ -932,10 +932,33 @@ router.post('/alert/update', isAuthenticated, function(req, res){
 
 /* PDF */
 router.get('/pdfAlerta', isAuthenticated, function(req, res){
-    db_conf.db.manyOrNone('select * from dependencias').then(function(data){
-        res.render('pdfBeta', {title: 'Amber', user: req.user, section: 'xml', deps: data})
+    var page     = 0;
+    var pageSize = 10;
+    var offset   = page * pageSize;
+    console.log(req.body.page);
+    db_conf.db.task(function(t){
+        return t.batch([
+            this.manyOrNone('select distinct dependencias.id, dependencias.nombre from dependencias, usuarios where (usuarios.id_dependencia = ' +
+                'dependencias.id or usuarios.permiso_administrador = TRUE) and usuarios.id = $1', [req.user.id]),
+            this.manyOrNone('select count(*) from alertas as count'),
+            this.manyOrNone('select alertas.id, alertas.title, alertas.id_usuario, alertas.sent, alertas.status, ' +
+                'alertas.msgtype, alertas.source from alertas, usuarios where (alertas.source = usuarios.id_dependencia  ' +
+                ' and usuarios.id = $3) or (usuarios.permiso_administrador = TRUE and usuarios.id = $3)  ' +
+                ' order by sent limit $1 offset $2', [pageSize, offset, req.user.id])
+        ])
+    }).then(function(data){
+        res.render('pdfBeta', {
+            title: 'Amber',
+            user: req.user,
+            section: 'pdf',
+            deps: data[0],
+            alertas: data[2],
+            pageNumber: page,
+            numberOfPages: parseInt((+data[1].count + pageSize - 1) / pageSize)
+        })
     })
 });
+
 
 /* XML */
 router.get('/xmlAlerta', isAuthenticated, function(req, res){
