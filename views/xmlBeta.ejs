@@ -90,6 +90,22 @@
                     </form>
                     <br>
                     <div id = "search_results">
+                        <%if (alertas.length > 0){%>
+                        <div class="list-group">
+                            <% for ( var i =0; i < alertas.length ; i ++ ){ %>
+                            <a href="#" class="list-group-item"  data-alertas_id="<%= alertas[i].id %>">
+                                <h4 class="list-group-item-heading"><strong>ID: <span style="color:#a6192e"><%=alertas[i].id%></span></strong></h4>
+                                <h4> <%= alertas[i].title %> </h4>
+                                <p class="list-group-item-text"> <strong>Enviada:</strong> <%= alertas[i].sent %></p>
+                            </a>
+                            <%}%>
+                        </div>
+
+                        <% include ./pagination.ejs %>
+
+                        <%}else {%>
+                        <div class="alert alert-info" role="alert">No hay alertas registradas</div>
+                        <%}%>
                     </div>
 
                     <!--<h4 id="xml" data-action="xml_gen">Generar</h4>-->
