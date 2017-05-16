@@ -371,7 +371,10 @@ router.post('/ind/register', isAuthenticated, function(req, res){
 
 /* Find ind */
 router.post('/ind/find-ind-view', isAuthenticated, function(req, res){
-    db_conf.db.manyOrNone('select * from alertas').then(function(data){
+    db_conf.db.manyOrNone('select alertas.id, alertas.title, alertas.id_usuario, alertas.sent, alertas.status, ' +
+        ' alertas.msgtype, alertas.source from alertas, usuarios where (alertas.source = usuarios.id_dependencia  ' +
+        ' and usuarios.id = $1) or (usuarios.permiso_administrador = TRUE and usuarios.id = $1)  ' +
+        ' order by sent', [req.user.id]).then(function(data){
         res.render('partials/find-inds-view', {title: 'Amber', user: req.user, alertas: data});
     }).catch(function(error){
         console.log(error);
