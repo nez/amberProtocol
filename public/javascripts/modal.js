@@ -347,6 +347,26 @@ function modalEvents(button, modal, page ) {
                     format: 'YYYY-MM-DD',
                     defaultDate: new Date().setDate(new Date().getDate())
                 });
+                // If direct click
+                $('#search_results').find('.list-group-item').click(function(){
+                    // Resources
+                    $('#search_results').load('/resource/results', {id: $(this).data('alertas_id')}, function(){
+                        $('#search_results').find('.list-group-item').click(function(){
+                            modal.find('#modal_content').load('/resource/edit', {id: $(this).data('resources_id')}, function(){
+                                modal.find('form').submit(function(e){
+                                    $.post('/resource/update', $(this).serializeArray()).done(function(data){
+                                        alert(data.message);
+                                        if(data.status == 'Ok'){
+                                            modal.modal('hide');
+                                        }
+                                    });
+                                    e.preventDefault();
+                                });
+                            });
+                        })
+                    })
+                });
+                // If lookup
                 modal.find('#find').submit(function(e){
                     modal.find('#search_results').load('/alerts/results', $(this).serializeArray(), function(){
                         $('#search_results').find('.list-group-item').click(function(){
