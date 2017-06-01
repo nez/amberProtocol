@@ -1022,7 +1022,9 @@ router.post('/alert/xml', isAuthenticated, function(req, res){
             this.manyOrNone('select * from event where id_alert = $1', [
                 req.body.id
             ]),
-            this.oneOrNone('select xmlelement(name alert, xmlattributes(title)) from alertas where id = $1', [
+            this.manyOrNone('select xmlelement(name alert, xmlattributes(alertas.title, alertas.sent, alertas.status), ' +
+                ' xmlelement(name infos, xmlattributes(infos.event))) from alertas, ' +
+                ' infos where infos.id_alert = alertas.id and alertas.id = $1', [
                 req.body.id
             ])
         ])
