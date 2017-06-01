@@ -1041,7 +1041,7 @@ router.post('/alert/xml', isAuthenticated, function(req, res){
             event: data[7],
             test: data[8]
         })*/
-        res.json(data[8].xmlelement);
+        res.json(data[8]);
     }).catch(function(error){
         console.log(error);
         res.json({
