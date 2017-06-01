@@ -1021,11 +1021,14 @@ router.post('/alert/xml', isAuthenticated, function(req, res){
             ]),
             this.manyOrNone('select * from event where id_alert = $1', [
                 req.body.id
+            ]),
+            this.oneOrNone('select xmlelement(name alert, xmlattributes(title)) from alertas where id = $1', [
+                req.body.id
             ])
         ])
     }).then(function(data){
-        console.log(data[4]);
-        res.render('partials/xml-results', {
+        console.log(data[8]);
+        /*res.render('partials/xml-test', {
             title: 'Amber',
             user: req.user,
             alerts: data[0],
@@ -1035,8 +1038,10 @@ router.post('/alert/xml', isAuthenticated, function(req, res){
             victims: data[4],
             suspects: data[5],
             companions: data[6],
-            event: data[7]
-        })
+            event: data[7],
+            test: data[8]
+        })*/
+        res.json(data[8].xmlelement);
     }).catch(function(error){
         console.log(error);
         res.json({
